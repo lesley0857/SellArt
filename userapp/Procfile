@@ -1,0 +1,1 @@
+web: gunicorn eshopperproject.wsgi
