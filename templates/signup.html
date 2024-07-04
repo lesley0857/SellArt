@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% load static %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block header_middle %}
+{% endblock header_middle %}
+
+{% block slider %}
+{% endblock slider %}
+
+{% block content %}
+<section id="form"><!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+                <div class="login-form"><!--login form-->
+                    <h2>Create your account</h2>
+
+                    <h2>New User Signup!</h2>
+                    <form action="{% url 'account_signup' %}" method="POST">
+                        {{ redirect_field }}
+                        {% csrf_token %}
+
+                        <input type="text" placeholder="Name" name="Name" id="Name" />
+                        <input type="email" placeholder="Email Address" name="Email" id="Email" />
+                        <input type="password" placeholder="Password" id="Password" name="Password" />
+                        <button type="submit" class="btn btn-default">Signup</button>
+                        <!-- </form> -->
+                </div><!--/login form-->
+            </div>
+
+        </div>
+    </div>
+</section><!--/form-->
+{% endblock content %}

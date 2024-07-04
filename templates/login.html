@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% load static %}
+{% load i18n %}
+{% load allauth account %}
+<!-- {% block head_title %}
+{% trans "Sign In" %}
+{% endblock head_title %} -->
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+{% block slider %}
+{% endblock slider %}
+
+{% block content %}
+<section id="form"><!--form-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-1">
+				<div class="login-form"><!--login form-->
+					<h2>Login to your account</h2>
+					{% if not SOCIALACCOUNT_ONLY %}
+					<form action="{% url 'login' %}" method="POST">
+						{% csrf_token %}
+						<input type="email" placeholder="Email" name="Email" id="Email" />
+						<input type="password" placeholder="Password" name="Password" id="Password" />
+						<span>
+							<input type="checkbox" class="checkbox">
+							Keep me signed in
+						</span>
+						<button type="submit" class="btn btn-default">Login</button>
+					</form>
+					{% endif %}
+
+					<!-- {% if SOCIALACCOUNT_ENABLED %}
+					{% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+					{% endif %} -->
+				</div><!--/login form-->
+			</div>
+
+		</div>
+	</div>
+</section><!--/form-->
+{% endblock content %}
+
+
+
+{% block brands %}
+{% endblock brands %}
+
+</html>
