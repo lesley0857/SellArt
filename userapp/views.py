@@ -6,11 +6,11 @@ from .models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from artapp.models import *
 
 def home_view(request):
-    
-    context={}
+    art = Artproduct.objects.filter(owner=request.user)
+    context={'art':art}
     return render(request, 'index.html', context)
 
 def login_view(request):

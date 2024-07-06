@@ -8,8 +8,12 @@ from userapp.models import *
 # Register your models here.
 admin.site.register(Category)
 
+class ArtpictureModelAdmin(admin.StackedInline):
+    model = ArtpictureModel
+
 @admin.register(Artproduct)
-class ArtproductCustombaseuserModelAdmin(admin.ModelAdmin):
+class ArtproductModelAdmin(admin.ModelAdmin):
+    inlines = [ArtpictureModelAdmin]
     def formfield_for_foreignkey(self, db_field: ForeignKey[Artproduct], request: HttpRequest, **kwargs: Any ) -> ModelChoiceField :
         if db_field.name=='owner':
             kwargs["queryset"]= Custombaseuser.objects.filter(id=request.user.id)
