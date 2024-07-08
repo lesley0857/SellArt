@@ -37,7 +37,7 @@ def signup_view(request):
     form = signup_form(request.POST)
     if request.method=="POST":
         Custombaseuser.objects.create_user(email=request.POST.get('Email'),
-                                         name=request.POST.get('Name'),
+                                         username=request.POST.get('Name'),
                                          password=request.POST.get('Password'))
         return redirect('profile_view')
     context={}
