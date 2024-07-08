@@ -9,7 +9,7 @@ from django.contrib import messages
 from artapp.models import *
 
 def home_view(request):
-    art = Artproduct.objects.filter(owner=request.user)
+    art = Artproduct.objects.filter(owner=request.user.id)
     context={'art':art}
     return render(request, 'index.html', context)
 
