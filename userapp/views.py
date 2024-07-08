@@ -9,7 +9,8 @@ from django.contrib import messages
 from artapp.models import *
 
 def home_view(request):
-    art = Artproduct.objects.filter(owner=request.user.id)
+    print(request.user)
+    art = Artproduct.objects.filter(owner=request.user.pk)
     context={'art':art}
     return render(request, 'index.html', context)
 
@@ -35,9 +36,9 @@ def logout_view(request):
 def signup_view(request):
     form = signup_form(request.POST)
     if request.method=="POST":
-        Custombaseuser.objects.create_user(request.POST.get('Email'),
-                                         request.POST.get('Name'),
-                                         request.POST.get('Password'))
+        Custombaseuser.objects.create_user(email=request.POST.get('Email'),
+                                         name=request.POST.get('Name'),
+                                         password=request.POST.get('Password'))
         return redirect('profile_view')
     context={}
     return render(request, 'signup.html', context)
