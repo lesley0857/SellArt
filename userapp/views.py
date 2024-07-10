@@ -26,8 +26,8 @@ def login_view(request):
             return redirect("home")
         else:
             messages.info(request, "Username OR Password is incorrect") 
-
-    context={}
+    category = Category.objects.all()
+    context={'category':category}
     return render(request, 'login.html', context)
 
 @login_required(login_url='login')

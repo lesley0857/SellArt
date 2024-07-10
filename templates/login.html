@@ -21,9 +21,9 @@
 				<div class="login-form"><!--login form-->
 					<h2>Login to your account</h2>
 					{% if not SOCIALACCOUNT_ONLY %}
-					<form action="{% url 'login' %}" method="POST">
+					<form action="{% url 'login' %}" method="POST" id="form">
 						{% csrf_token %}
-						<input type="email" placeholder="Email" name="Email" id="Email" />
+						<input type="email" placeholder="Email" name="Email" id="Email" onload="" />
 						<input type="password" placeholder="Password" name="Password" id="Password" />
 						<span>
 							<input type="checkbox" class="checkbox">
@@ -45,8 +45,12 @@
 {% endblock content %}
 
 
+{% block tabular_display %}
+{% endblock tabular_display %}
 
 {% block brands %}
 {% endblock brands %}
+<script src="{% static 'js/localscripts/login.js' %}"></script>
+
 
 </html>

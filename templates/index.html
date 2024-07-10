@@ -51,7 +51,6 @@
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 							</ul>
 						</div>
@@ -67,7 +66,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
+							<a href="index.html"><img src="images/home/logo.png" alt="LOGO" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -242,18 +241,18 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+										<a data-toggle="collapse" data-parent="#accordian" href="#{{i.id}}">
 											<span class="badge pull-right">{{ i.id|artproduct_count }}</span>
 											{{i.name}}
 										</a>
 									</h4>
 								</div>
 
-								<div id="sportswear" class="panel-collapse collapse">
+								<div id="{{i.id}}" class="panel-collapse collapse">
 									<div class="panel-body">
 										{%for arts in i.id|artproduct_loop %}
 										<ul>
-											<li><a href="#">{{arts.name}} </a></li>
+											<li><a href="{{arts.get_absolute_url}}">{{arts.name}} </a></li>
 										</ul>
 										{%endfor%}
 									</div>
@@ -600,6 +599,7 @@
 		</div>
 	</section>
 
+	{% block footer%}
 	<footer id="footer"><!--Footer-->
 		<div class="footer-top">
 			<div class="container">
@@ -698,13 +698,11 @@
 					</div>
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Quock Shop</h2>
+							<h2>Quick Shop</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">T-Shirt</a></li>
-								<li><a href="#">Mens</a></li>
-								<li><a href="#">Womens</a></li>
-								<li><a href="#">Gift Cards</a></li>
-								<li><a href="#">Shoes</a></li>
+								{% for i in category %}
+								<li><a href="#">{{i.name}}</a></li>
+								{%endfor%}
 							</ul>
 						</div>
 					</div>
@@ -759,7 +757,7 @@
 		</div>
 
 	</footer><!--/Footer-->
-
+	{%endblock footer%}
 </body>
 
 <script src="{% static 'js/jquery.js' %}"></script>

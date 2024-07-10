@@ -12,7 +12,7 @@ urlpatterns = [
     path('profile/',profile_view, name='profile_view'),
     path('logout/',logout_view, name='logout_view'),
     path('signup/',signup_view, name='signup'),
-    path('product/',product_view, name='product_view'),
+    path('product/<str:id>/',product_view, name='product_view'),
     # path('art',art_detail, name='art_detail'),
     
 ]
