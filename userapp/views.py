@@ -10,8 +10,10 @@ from artapp.models import *
 
 def home_view(request):
     print(request.user)
-    art = Artproduct.objects.filter(owner=request.user.pk)
-    context={'art':art}
+    art = Artproduct.objects.filter(owner__pk=request.user.pk)
+    category = Category.objects.all()
+    print(art)
+    context={'art':art,'category':category}
     return render(request, 'index.html', context)
 
 def login_view(request):
@@ -37,7 +39,7 @@ def signup_view(request):
     form = signup_form(request.POST)
     if request.method=="POST":
         Custombaseuser.objects.create_user(email=request.POST.get('Email'),
-                                         username=request.POST.get('Name'),
+                                         name=request.POST.get('Name'),
                                          password=request.POST.get('Password'))
         return redirect('profile_view')
     context={}
@@ -46,7 +48,7 @@ def signup_view(request):
 def profile_view(request):
 
     context={}
-    return render(request, 'login.html', context)
+    return render(request, 'index.html', context)
 
 def logout_view(request):
     logout(request)

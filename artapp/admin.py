@@ -18,3 +18,8 @@ class ArtproductModelAdmin(admin.ModelAdmin):
         if db_field.name=='owner':
             kwargs["queryset"]= Custombaseuser.objects.filter(id=request.user.id)
             return super().formfield_for_foreignkey(db_field, request, **kwargs)
+        
+    def formfield_for_foreignkey(self, db_field: ForeignKey[Artproduct], request: HttpRequest, **kwargs: Any ) -> ModelChoiceField :
+        if db_field.name=='category':
+            kwargs["queryset"]= Category.objects.all()
+            return super().formfield_for_foreignkey(db_field, request, **kwargs)

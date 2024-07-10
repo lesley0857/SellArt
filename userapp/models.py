@@ -35,7 +35,7 @@ class Custombaseuser(AbstractBaseUser, PermissionsMixin):
               'Married'), ('Widowed', 'Widowed'))
     
     email = models.EmailField(_('email address'), unique=True)
-    username = models.CharField(max_length=150, blank=False)
+    name = models.CharField(max_length=150, blank=False)
     products = models.CharField(max_length=150, blank=False,null=True)
     birth_date = models.DateField(blank=False, null=True)
     joined_date = models.DateTimeField(auto_now_add=True, null=True)

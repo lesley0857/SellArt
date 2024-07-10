@@ -18,7 +18,7 @@
                     <h2>Create your account</h2>
 
                     <h2>New User Signup!</h2>
-                    <form action="{% url 'account_signup' %}" method="POST">
+                    <form action="{% url 'signup' %}" method="POST">
                         {{ redirect_field }}
                         {% csrf_token %}
 
