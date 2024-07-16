@@ -2,6 +2,6 @@ from django.shortcuts import render
 from .models import *
 # Create your views here.
 def product_view(request,id):
-    product = Artproduct.objects.filter(name=id)
-    context={'product':product}
+    products = Artproduct.objects.all()
+    context={'products':products}
     return render(request, 'products.html', context)

@@ -13,3 +13,8 @@ def artproduct_count(value):
 def artproduct_loop(value):
     countval = Artproduct.objects.filter(category_id=value)
     return countval
+
+@register.filter
+def firstartpictures(value):
+    pictures = ArtpictureModel.objects.filter(pic_name=value)
+    return pictures[0].file.url

@@ -70,27 +70,17 @@
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa"
-									data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canada</a></li>
-									<li><a href="#">UK</a></li>
-								</ul>
-							</div>
+								{% if request.user.is_authenticated %}
+								<li>
+									<div class=" image d-flex flex-column justify-content-center align-items-center">
+										<button class="btn btn-secondary">
+											<img src="{{user.profile_pic.url}}" height="100" width="100" />
+										</button> <span class="name mt-3">{{request.user.name}}</span> <span
+											class="idd"></span>
 
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa"
-									data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canadian Dollar</a></li>
-									<li><a href="#">Pound</a></li>
-								</ul>
+									</div>
+								</li>
+								{%endif%}
 							</div>
 						</div>
 					</div>
@@ -98,6 +88,7 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								{% if request.user.is_authenticated %}
+
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
@@ -282,6 +273,10 @@
 						{% endblock brands %}
 					</div>
 				</div>
+				{% block productlist %}
+
+				{% endblock productlist %}
+
 				{% block tabular_display %}
 				<div class="col-sm-9 padding-right">
 

@@ -18,6 +18,7 @@ class Artproduct(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_view',kwargs={"id":self.name})
+    
     def __str__(self):
         return f'{self.name}'
     
