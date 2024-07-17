@@ -7,6 +7,7 @@ from typing import Any
 from userapp.models import *
 # Register your models here.
 admin.site.register(Category)
+admin.site.register(Brand)
 
 class ArtpictureModelAdmin(admin.StackedInline):
     model = ArtpictureModel

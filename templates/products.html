@@ -19,7 +19,7 @@
                         {%if product|firstartpictures %}
                         <img src="{{product|firstartpictures}}" alt="" />
                         {%else%}
-                        <img src="" alt="" />
+                        <img src="" alt="{{product.name}}" />
                         {%endif%}
                         <h2>$56</h2>
                         <p>{{product.description}}</p>
@@ -28,6 +28,11 @@
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
+                            {%if product|secondartpictures %}
+                            <img src="{{product|secondartpictures}}" alt="" />
+                            {%else%}
+                            <img src="" alt="{{product.name}}" />
+                            {%endif%}
                             <h2>$56</h2>
                             <p>Easy Polo Black Edition</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
