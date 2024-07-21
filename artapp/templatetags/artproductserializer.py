@@ -10,8 +10,8 @@ def artproduct_count(value):
     return countval.count()
 
 @register.filter
-def artproduct_for_tabular_display(value):
-    countval = Artproduct.objects.filter(category_id=value.pk)
+def artproduct_for_tabular_display(value,qs):
+    countval = Artproduct.objects.filter(category=value)
     return countval
 
 @register.filter

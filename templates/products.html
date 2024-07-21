@@ -11,27 +11,27 @@
 <div class="col-sm-9 padding-right">
     <div class="features_items"><!--features_items-->
         <h2 class="title text-center">Features Items</h2>
-        {% for product in products %}
+
         <div class="col-sm-4">
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        {%if product|firstartpictures %}
-                        <img src="{{product|firstartpictures}}" alt="" />
+                        {%if products.id|firstartpictures %}
+                        <img src="{{products.id|firstartpictures}}" alt="" />
                         {%else%}
-                        <img src="" alt="{{product.name}}" />
+                        <img src="" alt="{{products.name}}" />
                         {%endif%}
                         <h2>$56</h2>
-                        <p>{{product.description}}</p>
+                        <p>{{products.description}}</p>
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
                             cart</a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
-                            {%if product|secondartpictures %}
-                            <img src="{{product|secondartpictures}}" alt="" />
+                            {%if products|secondartpictures %}
+                            <img src="{{products|secondartpictures}}" alt="" />
                             {%else%}
-                            <img src="" alt="{{product.name}}" />
+                            <img src="" alt="{{products.name}}" />
                             {%endif%}
                             <h2>$56</h2>
                             <p>Easy Polo Black Edition</p>
@@ -48,14 +48,9 @@
                 </div>
             </div>
         </div>
-        {%endfor%}
 
-        <ul class="pagination">
-            <li class="active"><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">&raquo;</a></li>
-        </ul>
+
+
     </div><!--features_items-->
 </div>
 {% endblock content %}

@@ -8,6 +8,8 @@ class Category(models.Model):
     description = models.TextField(max_length=1500, blank=False)
     def __str__(self):
         return f'{self.name}'
+    def geturl(self):
+        return reverse('homee',kwargs={"id":self.id})
 
 class Brand(models.Model):
     name = models.CharField(max_length=150, blank=False)

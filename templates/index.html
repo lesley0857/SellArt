@@ -283,16 +283,20 @@
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								{%for cat in category %}
-								<li class="active"><a href="#{{cat.name}}" data-toggle="{{cat.name}}">{{cat.name}}</a>
-								</li>
+								<li><a href="{{cat.geturl}}" data-toggle="togg">{{cat.name}}</a>
+								</li>c
 								{%endfor%}
 							</ul>
 						</div>
 
 						<div class="tab-content">
-							{% for cat in category %}
-							<div class=" fade active in" id="{{cat.name}}">
-								{% for art in cat|artproduct_for_tabular_display%}
+							<script>function focuss() {
+									var elem = document.getElementById('togg')
+									elem.focus
+								}
+							</script>
+							<div class="tab-pane fade active in" id="togg" onload="focuss()">
+								{% for art in page_obj.object_list %}
 								<div class="col-sm-3">
 									<div class="product-image-wrapper">
 										<div class="single-products">
@@ -309,8 +313,17 @@
 									</div>
 								</div>
 								{%endfor%}
+								<ul class="pagination">
+									{%if page_obj.has_previous %}
+									<a href="?page={{page_obj.previous_page_number}}"> Previous </a>
+									{% endif %}
+									<li class="active"><a href="">{{page_obj.number}}</a></li>
+									{%if page_obj.has_next %}
+									<a href="?page={{page_obj.next_page_number}}">&raquo;</a>
+									{% endif %}
+								</ul>
+
 							</div>
-							{%endfor%}
 						</div>
 
 					</div><!--/category-tab-->

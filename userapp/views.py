@@ -8,15 +8,45 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from artapp.models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-def home_view(request):
-    print(request.user)
-    user= Custombaseuser.objects.filter(id=request.user.pk).first()
-    art = Artproduct.objects.filter(owner__pk=request.user.pk)
-    category = Category.objects.all()
-    print(art)
-    context={'user':user,'art':art,'category':category}
-    return render(request, 'index.html', context)
+
+def home_view(request,**kwargs):
+    if kwargs:
+        togg_number = kwargs['id']
+        user= Custombaseuser.objects.filter(id=request.user.pk).first()
+        art = Artproduct.objects.filter(owner__pk=request.user.pk)
+        tabular_display = Artproduct.objects.filter(category=togg_number)
+        category = Category.objects.all()
+        p = Paginator(tabular_display, 1)
+        print(art)
+        page_number = request.GET.get('page')
+        try:
+            page_obj = p.get_page(page_number)  
+        except PageNotAnInteger:
+            page_obj = p.page(1)
+        except EmptyPage:
+            page_obj = p.page(p.num_pages)
+        context={'user':user,'art':art,'category':category,
+                 'togg_number':togg_number,'page_obj': page_obj}
+        return render(request, 'index.html', context)
+    else:
+        print(request.user)
+        user= Custombaseuser.objects.filter(id=request.user.pk).first()
+        art = Artproduct.objects.filter(owner__pk=request.user.pk)
+        category = Category.objects.all()
+        p = Paginator(art, 2)
+        page_number = request.GET.get('page')
+        try:
+            page_obj = p.get_page(page_number)  # returns the desired page object
+        except PageNotAnInteger:
+            # if page_number is not an integer then assign the first page
+            page_obj = p.page(1)
+        except EmptyPage:
+            # if page is empty then return last page
+            page_obj = p.page(p.num_pages)
+        context={'user':user,'art':art,'category':category,'page_obj': page_obj}
+        return render(request, 'index.html', context)
 
 @authenticate_user
 def login_view(request):
