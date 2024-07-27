@@ -2,17 +2,14 @@ from django.db import models
 
 # Create your models here.
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from rest_framework.response import Response
-from rest_framework import status
 from django.utils.translation import gettext_lazy as _
-
 
 
 class ART_user_Manager(BaseUserManager):
     def create_user(self, email, name, password=None):
         if name is None:
             raise ValueError('User should have a name')
-        
+
         if email is None:
             raise ValueError(_('Please provide an email'))
         email = self.normalize_email(email)
@@ -33,10 +30,10 @@ class ART_user_Manager(BaseUserManager):
 class Custombaseuser(AbstractBaseUser, PermissionsMixin):
     STATUS = (('Single', 'Single'), ('Married',
               'Married'), ('Widowed', 'Widowed'))
-    
+
     email = models.EmailField(_('email address'), unique=True)
     name = models.CharField(max_length=150, blank=False)
-    products = models.CharField(max_length=150, blank=False,null=True)
+    products = models.CharField(max_length=150, blank=False, null=True)
     birth_date = models.DateField(blank=False, null=True)
     joined_date = models.DateTimeField(auto_now_add=True, null=True)
     phone_number = models.PositiveIntegerField(blank=False, null=True)
