@@ -96,11 +96,11 @@ TEMPLATES = [
 # WSGI_APPLICATION = 'eshopperproject.wsgi.application'
 ASGI_APPLICATION = "eshopperproject.asgi.application"
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.InMemoryChannelLayer",
-#     },
-# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # CHANNEL_LAYERS = {
 #     "default": {
