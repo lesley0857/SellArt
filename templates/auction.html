@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+</head>
+
+<body hx-ext="ws" ws-connect="/ws/auction/jvisa">
+    {% include 'partials/auction_display.html' %}
+    <form id="formm" ws-send name="formm" hx-target="notifications">
+        {% csrf_token %}
+        <div>
+            <input placeholder="input your bid value" name="input" type="number" id="number" />
+            <input type="submit" />
+        </div>
+    </form>
+</body>
+
+</html>
