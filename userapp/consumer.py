@@ -24,12 +24,15 @@ class ChatConsumer(WebsocketConsumer):
         print(text_data_json)
         data = text_data_json['input']
         # json.dumps({"message": data})
-        chat_value = auctiongroupChat.objects.filter(author=self.user).first()
+        chat_value = auctiongroupChat.objects.filter(author=self.user,
+                                                     Artproduct__name=self.room_name).first()
         print(chat_value)
         if chat_value == None:
+            artproduct = Artproduct.objects.filter(name=self.room_name).first()
             chat_value = auctiongroupChat.objects.create(author=self.user,
+                                                         Artproduct=artproduct,
                                                          auction_value=data,
-                                                         group=auctiongroup.objects.get(name='jvisa'))
+                                                         )
 
         else:
             chat_value.auction_value = data

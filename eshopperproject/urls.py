@@ -16,7 +16,8 @@ urlpatterns = [
     path('logout/', logout_view, name='logout_view'),
     path('signup/', signup_view, name='signup'),
     path('product/<str:id>/', product_view, name='product_view'),
-    path('ws/auction/j/', auction_view, name='auction_view'),
+    path('auction/', auction_view, name='auction_view'),
+    path('auction/<str:id>/', auction_view, name='auction_view_detail'),
     # path('art',art_detail, name='art_detail'),
 
 ]

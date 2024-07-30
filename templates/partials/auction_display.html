@@ -1,5 +1,24 @@
-<div name="notifications" id="notifications" hx-swap-oob="beforeend">
-    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
-    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
-    {{message.auction_value}}
-</div>
+{% load static %}
+{% load artproductserializer %}
+<script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+<script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+
+
+<ul class="m-b-0" name="notifications" id="notifications" hx-swap-oob="beforeend">
+    {%if message.author == user %}
+    <li class="clearfix">
+        <div class="message-data text-right">
+            <span class="message-data-time">10:10 AM, Today</span>
+            <img src="{{message.author_id|imagefromauctionid}}" alt="avatar" />
+        </div>
+        <div class="message other-message float-right">{{message.auction_value}}</div>
+    </li>
+    {% else %}
+    <li class="clearfix">
+        <div class="message-data">
+            <span class="message-data-time">10:12 AM, Today</span>
+        </div>
+        <div class="message my-message">{{message.auction_value}}</div>
+    </li>
+    {% endif %}
+</ul>

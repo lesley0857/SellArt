@@ -25,7 +25,7 @@ SECRET_KEY = 'doxzhnh*cl@k(5htk946)z*zf8@$)5wua%!5=%*qyt-5!2euxk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1:8000', 'sellart-2.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sellart-2.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://sellart-2.onrender.com']
 
 # Application definition

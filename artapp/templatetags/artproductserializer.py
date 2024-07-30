@@ -2,27 +2,32 @@ from django import template
 from artapp.views import *
 from artapp.models import *
 
-register =  template.Library()
+register = template.Library()
+
 
 @register.filter
 def artproduct_count(value):
     countval = Artproduct.objects.filter(category_id=value)
     return countval.count()
 
+
 @register.filter
-def artproduct_for_tabular_display(value,qs):
+def artproduct_for_tabular_display(value, qs):
     countval = Artproduct.objects.filter(category=value)
     return countval
+
 
 @register.filter
 def artproduct_loop(value):
     countval = Artproduct.objects.filter(category_id=value)
     return countval
 
+
 @register.filter
 def firstartpictures(value):
     pictures = ArtpictureModel.objects.filter(pic_name=value)
     return pictures.first().file.url
+
 
 @register.filter
 def secondartpictures(value):
@@ -33,5 +38,7 @@ def secondartpictures(value):
         pass
 
 
-
-
+@register.filter
+def imagefromauctionid(value):
+    picture = Custombaseuser.objects.filter(id=value)
+    return picture.first().profile_pic.url
