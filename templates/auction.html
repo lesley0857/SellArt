@@ -14,7 +14,7 @@
 
     <link href="{% static 'css/auction.css' %}" rel="stylesheet">
     <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
-    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
 </head>
 {% block slider %}{%endblock slider%}
 
@@ -23,6 +23,50 @@
     body {
         background-color: #f4f7f6;
         margin-top: 20px;
+    }
+
+    .people-list-on-small-screen {
+        background-color: black;
+        margin-bottom: 1em;
+    }
+
+
+    .ratings i {
+        font-size: 16px;
+        color: red
+    }
+
+    .strike-text {
+        color: red;
+        text-decoration: line-through
+    }
+
+    .product-image {
+        width: 100%
+    }
+
+    .dot {
+        height: 7px;
+        width: 7px;
+        margin-left: 6px;
+        margin-right: 6px;
+        margin-top: 3px;
+        background-color: blue;
+        border-radius: 50%;
+        display: inline-block
+    }
+
+    .spec-1 {
+        color: #938787;
+        font-size: 15px
+    }
+
+    h5 {
+        font-weight: 400
+    }
+
+    .para {
+        font-size: 16px
     }
 
     .card {
@@ -44,6 +88,7 @@
         padding: 20px;
         z-index: 7
     }
+
 
     .chat-app .chat {
         margin-left: 280px;
@@ -233,6 +278,13 @@
         height: 0
     }
 
+    @media screen and (min-width: 767px) {
+        .people-list-on-small-screen {
+            background-color: lightgreen;
+            display: none;
+        }
+    }
+
     @media only screen and (max-width: 767px) {
         .chat-app .people-list {
             height: 465px;
@@ -283,159 +335,194 @@
             height: calc(100vh - 350px);
             overflow-x: auto
         }
+
     }
 </style>
 <h2>Bid Section </h2>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-lg-12">
-            <div class="card chat-app">
-                <div id="plist" class="people-list">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-search"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Search...">
-                    </div>
-                    <ul class="list-unstyled chat-list mt-2 mb-0">
-                        {%for art in arts %}
-                        <a href="{{art.get_auction_url}}">
-                            <li class="clearfix">
-                                <img src="{{art|firstartpictures}}" alt="avatar">
-                                <div class="about">
-                                    <div class="name">{{art.name}}</div>
-                                    <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
-                                </div>
-                            </li>
-                        </a>
-                        {%endfor%}
-                    </ul>
-                </div>
-                <div class="chat" id="chat">
-                    {%if message %}
-                    <div class="chat-header clearfix">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                </a>
-                                <div class="chat-about">
-                                    <h6 class="m-b-0">Aiden Chavez</h6>
-                                    <small>Last seen: 2 hours ago</small>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 hidden-sm text-right">
-                                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-                                        class="fa fa-camera"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-primary"><i
-                                        class="fa fa-image"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-info"><i
-                                        class="fa fa-cogs"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-warning"><i
-                                        class="fa fa-question"></i></a>
-                            </div>
-                        </div>
 
-                        <div class="chat-history">
-                            {%for i in message %}
-                            <ul class="m-b-0">
-                                {% if i.author == request.user %}
+
+<div hx-ext="ws" ws-connect="/ws/auction/Stars">
+    <div class="container mt-5 mb-5 people-list-on-small-screen">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                {%for art in arts %}
+                <a href="{{art.get_auction_url}}">
+                    <div class="row p-2 bg-white border rounded">
+                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+                                src="{{art|firstartpictures}}"></div>
+                        <div class="col-md-6 mt-1">
+                            <h5>{{art.name}}</h5>
+                            <div class="d-flex flex-row">
+                                <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                        class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                            </div>
+                            <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light
+                                    weight</span><span class="dot"></span><span>Best finish<br></span></div>
+                            <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span class="dot"></span><span>For
+                                    men</span><span class="dot"></span><span>Casual<br></span></div>
+                            <p class="text-justify text-truncate para mb-0">There are many variations of passages of
+                                Lorem
+                                Ipsum available, but the majority have suffered alteration in some form, by injected
+                                humour,
+                                or randomised words which don't look even slightly believable.<br><br></p>
+                        </div>
+                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                            <div class="d-flex flex-row align-items-center">
+                                <h4 class="mr-1">$13.99</h4><span class="strike-text">$20.99</span>
+                            </div>
+                            <h6 class="text-success">Free shipping</h6>
+                            <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm"
+                                    type="button">Details</button><button class="btn btn-outline-primary btn-sm mt-2"
+                                    type="button">Add to wishlist</button></div>
+                        </div>
+                    </div>
+                </a>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card chat-app">
+                    <div id="plist" class="people-list">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                        <ul class="list-unstyled chat-list mt-2 mb-0">
+                            {%for art in arts %}
+                            <a href="{{art.get_auction_url}}">
                                 <li class="clearfix">
-                                    <div class="message-data text-right">
-                                        <span class="message-data-time">10:10 AM, Today</span>
-                                        <img src="{{i.author_id|imagefromauctionid}}" alt="avatar" />
+                                    <img src="{{art|firstartpictures}}" alt="avatar">
+                                    <div class="about">
+                                        <div class="name">{{art.name}}</div>
+                                        <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
                                     </div>
-                                    <div class="message other-message float-right">{{i.auction_value}}</div>
                                 </li>
-                                {% else %}
-                                <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">10:12 AM, Today</span>
-                                    </div>
-                                    <div class="message my-message">{{i.auction_value}}</div>
-                                </li>
-                                {% endif %}
-                            </ul>
+                            </a>
                             {%endfor%}
-                            {% include 'partials/auction_display.html' %}
-                        </div>
-
-                        <div class="chat-message clearfix">
-                            <div class="input-group mb-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-send"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Enter text here...">
-                            </div>
-                        </div>
+                        </ul>
                     </div>
-
-                    {%else%}
-                    <div class="chat-header clearfix">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                </a>
-                                <div class="chat-about">
-                                    <h6 class="m-b-0">Aiden Chavez</h6>
-                                    <small>Last seen: 2 hours ago</small>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 hidden-sm text-right">
-                                <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-                                        class="fa fa-camera"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-primary"><i
-                                        class="fa fa-image"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-info"><i
-                                        class="fa fa-cogs"></i></a>
-                                <a href="javascript:void(0);" class="btn btn-outline-warning"><i
-                                        class="fa fa-question"></i></a>
-                            </div>
-                        </div>
-                        <div class="chat-history">
-                            <ul class="m-b-0">
-
-                                <li class="clearfix">
-                                    <div class="message-data text-right">
-                                        <span class="message-data-time">10:10 AM, Today</span>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" />
+                    <div class="chat" id="chat">
+                        {%if message %}
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        <img src="{{particular_art|firstartpictures}}" alt="avatar">
+                                    </a>
+                                    <div class="chat-about">
+                                        <h6 class="m-b-0">Aiden Chavez</h6>
+                                        <small>Last seen: 2 hours ago</small>
                                     </div>
-                                    <div class="message other-message float-right">No bids</div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="chat-message clearfix">
-                            <div class="input-group mb-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-send"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Enter text here...">
+                                <div class="col-lg-6 hidden-sm text-right">
+                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
+                                            class="fa fa-camera"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i
+                                            class="fa fa-image"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i
+                                            class="fa fa-cogs"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i
+                                            class="fa fa-question"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="chat-history">
+                                {%for i in message %}
+                                <ul class="m-b-0">
+                                    {% if i.author == request.user %}
+                                    <li class="clearfix">
+                                        <div class="message-data text-right">
+                                            <span class="message-data-time">10:10 AM, Today</span>
+                                            <img src="{{i.author_id|imagefromauctionid}}" alt="avatar" />
+                                        </div>
+                                        <div class="message other-message float-right">{{i.auction_value}}</div>
+                                    </li>
+                                    {% else %}
+                                    <li class="clearfix">
+                                        <div class="message-data">
+                                            <span class="message-data-time">10:12 AM, Today</span>
+                                        </div>
+                                        <div class="message my-message">{{i.auction_value}}</div>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                                {%endfor%}
+                                {% include 'partials/auction_display.html' %}
+                            </div>
+
+                            <div class="chat-history clearfix">
+                                <form id="form" ws-send class="input-group mb-0">
+                                    {%csrf_token%}
+                                    <input type="number" placeholder="Type your Bid here" name="input"
+                                        class="form-control">
+                                    <input type="submit" />
+                                </form>
                             </div>
                         </div>
+
+                        {%else%}
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        <img src="{{particular_art|firstartpictures}}" alt="avatar">
+                                    </a>
+                                    <div class="chat-about">
+                                        <h6 class="m-b-0">{{particular_art.name}}</h6>
+                                        <small>Auction Starting Soon</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 hidden-sm text-right">
+                                    <!-- <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
+                                            class="fa fa-camera"></i></a> -->
+                                    <!-- <a href="javascript:void(0);" class="btn btn-outline-primary"><i
+                                            class="fa fa-image"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i
+                                            class="fa fa-cogs"></i></a> -->
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i
+                                            class="fa fa-question"></i></a>
+                                </div>
+                            </div>
+                            <div class="chat-history">
+                                <ul class="m-b-0">
+                                    <li class="clearfix">
+                                        <div class="message-data text-right">
+                                            <span class="message-data-time"> Today</span>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                alt="avatar" />
+                                        </div>
+                                        <div class="message other-message float-right">No bids</div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="chat-history clearfix">
+                                <form id="form" ws-send class="input-group mb-0">
+                                    {%csrf_token%}
+                                    <input type="number" placeholder="Type your Bid here" name="input"
+                                        class="form-control">
+                                    <input type="submit" />
+                                </form>
+                            </div>
+                        </div>
+                        {%endif%}
                     </div>
-                    {%endif%}
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <body hx-ext="ws" ws-connect="/ws/auction/{{art_name}}">
-        <form id="formm" ws-send name="formm" hx-target="notifications">
-            {% csrf_token %}
-            <div>
-                <input placeholder="input your bid value" name="input" type="number" id="number" />
-                <input type="submit" />
-            </div>
-        </form>
-    </body>
-
-    {% endblock content %}
-    {% block tabular_display %} {%endblock tabular_display %}
-    {%block category %}{%endblock category %}
-    {%block brands %}{%endblock brands %}
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/auction.js' %}"></script>
+{% endblock content %}
+{% block tabular_display %} {%endblock tabular_display %}
+{%block category %}{%endblock category %}
+{%block brands %}{%endblock brands %}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/auction.js' %}"></script>
 
 </html>

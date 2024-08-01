@@ -16,7 +16,8 @@ def auction_view(request, **kwargs):
         particular_art = Artproduct.objects.filter(name=art_id).first()
         message = auctiongroupChat.objects.filter(
             Artproduct=particular_art)
-        context = {'art_name': art_id, 'arts': art, 'message': message}
+        context = {'art_name': art_id, 'arts': art, 'message': message,
+                   'particular_art': particular_art}
         return render(request, 'auction.html', context)
     else:
         art = Artproduct.objects.all()
