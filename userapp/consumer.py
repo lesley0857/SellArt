@@ -7,7 +7,6 @@ from auction_app.models import *
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        print('herrrrrrrr')
         self.user = self.scope['user']
         self.room_name = self.scope["url_route"]["kwargs"]["roomname"]
         self.room_group_name = f"chat_{self.room_name}"
@@ -24,9 +23,10 @@ class ChatConsumer(WebsocketConsumer):
         print(text_data_json)
         data = text_data_json['input']
         # json.dumps({"message": data})
+        artt = Artproduct.objects.filter(name=self.room_name).first()
         chat_value = auctiongroupChat.objects.filter(author=self.user,
-                                                     Artproduct__name=self.room_name).first()
-        print(chat_value)
+                                                     Artproduct=artt.pk).first()
+
         if chat_value == None:
             artproduct = Artproduct.objects.filter(name=self.room_name).first()
             chat_value = auctiongroupChat.objects.create(author=self.user,
@@ -47,7 +47,6 @@ class ChatConsumer(WebsocketConsumer):
 
     def message_handler(self, event):
         message_id = event['message_id']
-        print(message_id)
         message = auctiongroupChat.objects.get(id=message_id)
         context = {'message': message, 'user': self.user}
         message_html = render_to_string(
@@ -55,4 +54,8 @@ class ChatConsumer(WebsocketConsumer):
         self.send(text_data=message_html)
 
     def disconnect(self, close_code):
+        # send out message before disconnecting
+        # based on the cause of disconnection
+        # On the load of auction page without a kwargs-
+        # diconnect the websocket
         pass

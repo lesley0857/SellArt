@@ -8,7 +8,7 @@
     {%if message.author == user %}
     <li class="clearfix">
         <div class="message-data text-right">
-            <span class="message-data-time">10:10 AM, Today</span>
+            <span class="message-data-time">{{message.created}}</span>
             <img src="{{message.author_id|imagefromauctionid}}" alt="avatar" />
         </div>
         <div class="message other-message float-right">{{message.auction_value}}</div>
@@ -16,7 +16,7 @@
     {% else %}
     <li class="clearfix">
         <div class="message-data">
-            <span class="message-data-time">10:12 AM, Today</span>
+            <span class="message-data-time">Select a product </span>
         </div>
         <div class="message my-message">{{message.auction_value}}</div>
     </li>

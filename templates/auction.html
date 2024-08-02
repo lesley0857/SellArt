@@ -26,8 +26,9 @@
     }
 
     .people-list-on-small-screen {
-        background-color: black;
         margin-bottom: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
     }
 
 
@@ -42,7 +43,9 @@
     }
 
     .product-image {
-        width: 100%
+        width: 100%;
+        height: 20%;
+        background-color: black;
     }
 
     .dot {
@@ -340,44 +343,70 @@
 </style>
 <h2>Bid Section </h2>
 
-
-<div hx-ext="ws" ws-connect="/ws/auction/Stars">
+<div hx-ext="ws" ws-connect="/ws/auction/{{particular_art}}">
     <div class="container mt-5 mb-5 people-list-on-small-screen">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
-                {%for art in arts %}
-                <a href="{{art.get_auction_url}}">
-                    <div class="row p-2 bg-white border rounded">
-                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                src="{{art|firstartpictures}}"></div>
-                        <div class="col-md-6 mt-1">
-                            <h5>{{art.name}}</h5>
-                            <div class="d-flex flex-row">
-                                <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                        class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
-                            </div>
-                            <div class="mt-1 mb-1 spec-1"><span>100% cotton</span><span class="dot"></span><span>Light
-                                    weight</span><span class="dot"></span><span>Best finish<br></span></div>
-                            <div class="mt-1 mb-1 spec-1"><span>Unique design</span><span class="dot"></span><span>For
-                                    men</span><span class="dot"></span><span>Casual<br></span></div>
-                            <p class="text-justify text-truncate para mb-0">There are many variations of passages of
-                                Lorem
-                                Ipsum available, but the majority have suffered alteration in some form, by injected
-                                humour,
-                                or randomised words which don't look even slightly believable.<br><br></p>
+                {% for art in page_obj.object_list %}
+                <div class="row p-2 bg-white border rounded">
+                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+                            src="{{art|firstartpictures}}"></div>
+                    <div class="col-md-6 mt-1">
+                        <h5>{{art.name}}</h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                    class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
                         </div>
-                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                            <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1">$13.99</h4><span class="strike-text">$20.99</span>
-                            </div>
-                            <h6 class="text-success">Free shipping</h6>
-                            <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm"
-                                    type="button">Details</button><button class="btn btn-outline-primary btn-sm mt-2"
-                                    type="button">Add to wishlist</button></div>
+                        <div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Dimension</th>
+                                        <th scope="col">Length</th>
+                                        <th scope="col">Width</th>
+                                        <th scope="col">Height</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Frame</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Value</th>
+                                        <td>{{art.length}} cm</td>
+                                        <td>{{art.width}} cm</td>
+                                        <td>{{art.height}} cm</td>
+                                        <td>{{art.weight}} kg</td>
+                                        <td>{{art.frame}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                        <p class="text-justify text-truncate para mb-0">
+                            {{art.description}}<br><br></p>
                     </div>
-                </a>
+                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                        <div class="d-flex flex-row align-items-center">
+                            <h4 class="mr-1">N{{art.price}}</h4><span class="strike-text">$20.99</span>
+                        </div>
+                        <h6 class="text-success">Free shipping</h6>
+                        <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button">
+                                <a href="{{art.get_auction_url}}">{{art.name}}</a>
+                            </button><button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to
+                                wishlist</button></div>
+                    </div>
+                </div>
                 {%endfor%}
+                <ul class="pagination">
+                    {%if page_obj.has_previous %}
+                    <a href="?page={{page_obj.previous_page_number}}"> PREVIOUS </a>
+                    {% endif %}
+                    <li class="active"><a href="">{{page_obj.number}}</a></li>
+                    <br>
+                    {%if page_obj.has_next %}
+                    <a href="?page={{page_obj.next_page_number}}">NEXT</a>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>
@@ -412,20 +441,18 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                        <img src="{{particular_art|firstartpictures}}" alt="avatar">
+                                        {%if particular_art %}
+                                        <img src="{{particular_art.pk|firstartpictures}}" alt="avatar">
+                                        {%else%}
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                        {%endif%}
                                     </a>
                                     <div class="chat-about">
-                                        <h6 class="m-b-0">Aiden Chavez</h6>
-                                        <small>Last seen: 2 hours ago</small>
+                                        <h6 class="m-b-0">{{particular_art.name}}</h6>
+                                        <small style="color: #86c541;">Ongoing Auction</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-                                            class="fa fa-camera"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i
-                                            class="fa fa-image"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i
-                                            class="fa fa-cogs"></i></a>
                                     <a href="javascript:void(0);" class="btn btn-outline-warning"><i
                                             class="fa fa-question"></i></a>
                                 </div>
@@ -437,7 +464,7 @@
                                     {% if i.author == request.user %}
                                     <li class="clearfix">
                                         <div class="message-data text-right">
-                                            <span class="message-data-time">10:10 AM, Today</span>
+                                            <span class="message-data-time">{{i.created}}</span>
                                             <img src="{{i.author_id|imagefromauctionid}}" alt="avatar" />
                                         </div>
                                         <div class="message other-message float-right">{{i.auction_value}}</div>
@@ -445,7 +472,7 @@
                                     {% else %}
                                     <li class="clearfix">
                                         <div class="message-data">
-                                            <span class="message-data-time">10:12 AM, Today</span>
+                                            <span class="message-data-time">{{i.created}}</span>
                                         </div>
                                         <div class="message my-message">{{i.auction_value}}</div>
                                     </li>
@@ -474,7 +501,7 @@
                                     </a>
                                     <div class="chat-about">
                                         <h6 class="m-b-0">{{particular_art.name}}</h6>
-                                        <small>Auction Starting Soon</small>
+                                        <small style="color: rgba(255, 0, 0, 0.501);">Auction Starting Soon</small>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">

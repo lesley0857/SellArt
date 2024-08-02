@@ -30,6 +30,11 @@ class Artproduct(models.Model):
         Custombaseuser, on_delete=models.CASCADE, null=True, blank=True, related_name='owner')
     name = models.CharField(max_length=150, blank=False)
     description = models.TextField(max_length=1500, blank=False)
+    length = models.IntegerField(blank=True, null=True)
+    width = models.IntegerField(blank=True, null=True)
+    height = models.IntegerField(blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    frame = models.BooleanField(blank=True, null=True)
     brand = models.ForeignKey(
         Brand, on_delete=models.CASCADE, null=True, blank=True, related_name='category')
     creation_date = models.DateTimeField(auto_now_add=True, null=True)
