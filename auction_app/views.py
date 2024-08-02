@@ -33,5 +33,13 @@ def auction_view(request, **kwargs):
         user = request.user.email
         message = auctiongroupChat.objects.filter(author__email=user)
         print(message)
-        context = {'arts': art, 'message': message}
+        paginator = Paginator(art, 2)
+        page_number = request.GET.get('page')
+        try:
+            page_obj = paginator.get_page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        context = {'page_obj': page_obj, 'arts': art, 'message': message}
         return render(request, 'auction.html', context)
