@@ -39,6 +39,7 @@ class Artproduct(models.Model):
         Brand, on_delete=models.CASCADE, null=True, blank=True, related_name='category')
     creation_date = models.DateTimeField(auto_now_add=True, null=True)
     price = models.CharField(max_length=100, blank=False, null=True)
+    auction_activated = models.BooleanField(default=False,)
 
     def get_absolute_url(self):
         return reverse('product_view', kwargs={"id": self.name})

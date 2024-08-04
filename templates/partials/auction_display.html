@@ -2,23 +2,50 @@
 {% load artproductserializer %}
 <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
 <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 
 
-<ul class="m-b-0" name="notifications" id="notifications" hx-swap-oob="beforeend">
+<ul class="m-b-0 fadeInAndUp" name="notifications" id="notifications" hx-swap-oob="beforeend">
     {%if message.author == user %}
     <li class="clearfix">
         <div class="message-data text-right">
+            <span>{{message.author.name}}</span>
             <span class="message-data-time">{{message.created}}</span>
             <img src="{{message.author_id|imagefromauctionid}}" alt="avatar" />
         </div>
         <div class="message other-message float-right">{{message.auction_value}}</div>
     </li>
     {% else %}
-    <li class="clearfix">
+    <!-- <li class="clearfix">
         <div class="message-data">
             <span class="message-data-time">Select a product </span>
         </div>
         <div class="message my-message">{{message.auction_value}}</div>
-    </li>
+    </li> -->
     {% endif %}
 </ul>
+<style>
+    @keyframes fadeInAndUp {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0px)
+        }
+    }
+
+    .fade-In-up {
+        animation: fadeInAndUp 0.6s ease;
+    }
+</style>
+
+<!-- <script>
+    function scrollToBottom() {
+        const container = document.getElementById('chat-history');
+        container.scrollTop = container.scrollHeight;
+    }
+    scrollToBottom()
+</script> -->

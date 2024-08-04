@@ -14,6 +14,7 @@
 
     <link href="{% static 'css/auction.css' %}" rel="stylesheet">
     <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
 </head>
 {% block slider %}{%endblock slider%}
@@ -440,6 +441,7 @@
                         <div class="chat-header clearfix">
                             <div class="row">
                                 <div class="col-lg-6">
+                                    {%include 'partials/status.html'%}
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                         {%if particular_art %}
                                         <img src="{{particular_art.pk|firstartpictures}}" alt="avatar">
@@ -458,12 +460,13 @@
                                 </div>
                             </div>
 
-                            <div class="chat-history">
+                            <div class="chat-history" id="chat-history">
                                 {%for i in message %}
                                 <ul class="m-b-0">
                                     {% if i.author == request.user %}
                                     <li class="clearfix">
                                         <div class="message-data text-right">
+                                            <span>{{i.author.name}}</span>
                                             <span class="message-data-time">{{i.created}}</span>
                                             <img src="{{i.author_id|imagefromauctionid}}" alt="avatar" />
                                         </div>
@@ -472,7 +475,8 @@
                                     {% else %}
                                     <li class="clearfix">
                                         <div class="message-data">
-                                            <span class="message-data-time">{{i.created}}</span>
+                                            <span>{{i.author.name}}</span>
+                                            <div class="message-data-time">{{i.created}}</div>
                                         </div>
                                         <div class="message my-message">{{i.auction_value}}</div>
                                     </li>
@@ -497,12 +501,18 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        {% if particular_art %}
+                                        {%include 'partials/status.html'%}
                                         <img src="{{particular_art|firstartpictures}}" alt="avatar">
+                                        {%else%}
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
+
+                                        {%endif%} <div class="chat-about">
+                                            <h6 class="m-b-0">{{particular_art.name}}</h6>
+                                            <small style="color: rgba(255, 0, 0, 0.501);">Auction Starting Soon</small>
+                                        </div>
+
                                     </a>
-                                    <div class="chat-about">
-                                        <h6 class="m-b-0">{{particular_art.name}}</h6>
-                                        <small style="color: rgba(255, 0, 0, 0.501);">Auction Starting Soon</small>
-                                    </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
                                     <!-- <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
@@ -551,5 +561,12 @@
 {%block brands %}{%endblock brands %}
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/auction.js' %}"></script>
+<!-- <script>
+    function scrollToBottom() {
+        const container = document.getElementById('chat-history');
+        container.scrollTop = container.scrollHeight;
+    }
+    scrollToBottom()
+</script> -->
 
 </html>

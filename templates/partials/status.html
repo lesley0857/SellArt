@@ -1,0 +1,14 @@
+{% load static %}
+
+<script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+<script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+<h2 id="status">
+    {% if status %}
+    <span style="color: green;" class="badge badge-pill badge-success">Online</span>
+    {%else%}
+    <span class="badge badge-secondary">Offline</span> {%endif%}
+    {{people_online}} currently on the art group
+</h2>
