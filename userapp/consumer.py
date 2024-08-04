@@ -18,7 +18,8 @@ class ChatConsumer(WebsocketConsumer):
 
         if created_group:
             self.augroup = created_group
-        self.augroup = group
+        else:
+            self.augroup = group
         # Join room groupy
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name, self.channel_name
@@ -67,9 +68,6 @@ class ChatConsumer(WebsocketConsumer):
         message_html = render_to_string(
             "partials/auction_display.html", context=context)
         self.send(text_data=message_html)
-
-    def tell_if_im_online():
-        return
 
     def update_online_status(self, event):
         user = Custombaseuser.objects.get(name=self.user)

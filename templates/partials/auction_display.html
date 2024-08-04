@@ -16,12 +16,13 @@
         <div class="message other-message float-right">{{message.auction_value}}</div>
     </li>
     {% else %}
-    <!-- <li class="clearfix">
+    <li class="clearfix">
         <div class="message-data">
-            <span class="message-data-time">Select a product </span>
+            <span>{{message.author.name}}</span>
+            <span class="message-data-time">{{message.created}}</span>
         </div>
         <div class="message my-message">{{message.auction_value}}</div>
-    </li> -->
+    </li>
     {% endif %}
 </ul>
 <style>
