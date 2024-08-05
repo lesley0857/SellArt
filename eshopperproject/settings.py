@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'channels',
     'userapp',
     'artapp',
+
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +98,15 @@ TEMPLATES = [
 
 # WSGI_APPLICATION = 'eshopperproject.wsgi.application'
 ASGI_APPLICATION = "eshopperproject.asgi.application"
+
+# Celery Settings
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
 
 CHANNEL_LAYERS = {
     "default": {

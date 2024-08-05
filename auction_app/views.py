@@ -15,6 +15,7 @@ def auction_view(request, **kwargs):
         print(art_id)
         art = Artproduct.objects.all()
         particular_art = Artproduct.objects.filter(name=art_id).first()
+        auction_mode = particular_art.auction_activated
         message = auctiongroupChat.objects.filter(
             Artproduct=particular_art)
         paginator = Paginator(art, 2)
@@ -25,7 +26,7 @@ def auction_view(request, **kwargs):
             page_obj = paginator.page(1)
         except EmptyPage:
             page_obj = paginator.page(paginator.num_pages)
-        context = {'art_name': art_id, 'arts': art, 'message': message,
+        context = {'auction_mode': auction_mode, 'art_name': art_id, 'arts': art, 'message': message,
                    'page_obj': page_obj, 'particular_art': particular_art}
         return render(request, 'auction.html', context)
     else:
