@@ -8,7 +8,15 @@
 <h2 id="status">
     {% if status %}
     <span style="color: green;" class="badge badge-pill badge-success">Online</span>
+    <span style="color: green;" class="badge badge-pill badge-success">
+        {{people_online}} user online
+    </span>
     {%else%}
-    <span class="badge badge-secondary">Offline</span> {%endif%}
-    {{people_online}} user online
+    <span style="color: grey;" class="badge badge-secondary">Offline</span>
+    <span style="color: grey;" class="badge badge-pill badge-success">
+        {{people_online}} user online
+    </span>
+    {%endif%}
+
+
 </h2>

@@ -9,9 +9,11 @@ services:
       - "6379:6379"
     expose:
       - 6379
+
   art_django_app:
     build:
       context: .
+    image: django-image
     entrypoint: /app/entrypoint.sh
     ports:
       - "8000:8000"
@@ -25,11 +27,23 @@ services:
       - redis
 
   celery_app:
+    image: django-image
     container_name: celery
-    build:
-      context: .
-    entrypoint: /app/worker_entrypoint.sh
     command: celery --app=eshopperproject worker --pool=solo -l INFO
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - art_django_app
+
+  beat:
+    container_name: beat
+    image: django-image
+    command: celery -A eshopperproject beat -l INFO
+    volumes:
+      - .:/app
     env_file:
       - .env
     depends_on:

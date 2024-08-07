@@ -146,6 +146,7 @@
 		<!--/header-bottom-->
 	</header><!--/header-->
 
+
 	{% block slider %}
 	<section id="slider"><!--slider-->
 		<div class="container">
@@ -530,6 +531,8 @@
 <script src="{% static 'js/price-range.js' %}"></script>
 <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+
+{%block modalscript%}
 <script>
 	$(document).ready(function () {
 		$('#myModal').modal('show');
@@ -563,5 +566,6 @@
 		}
 	}, 1000);
 </script>
+{%endblock modalscript%}
 
 </html>

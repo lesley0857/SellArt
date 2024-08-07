@@ -24,6 +24,10 @@ class Brand(models.Model):
 
 
 class Artproduct(models.Model):
+    AUCTION_STATUS = (('None', 'None'),
+                      ('Activated', 'Activated'),
+                      ('Deactivated', 'Deactivated'),
+                      )
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True, related_name='category')
     owner = models.ForeignKey(
@@ -39,7 +43,10 @@ class Artproduct(models.Model):
         Brand, on_delete=models.CASCADE, null=True, blank=True, related_name='category')
     creation_date = models.DateTimeField(auto_now_add=True, null=True)
     price = models.CharField(max_length=100, blank=False, null=True)
-    auction_activated = models.BooleanField(default=False,)
+    auction_activated = models.CharField(
+        max_length=200, choices=AUCTION_STATUS, default='STATUS[0]', blank=False, null=True)
+    auction_time = models.DateTimeField(blank=True, null=True)
+    auction_stop_time = models.DateTimeField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('product_view', kwargs={"id": self.name})

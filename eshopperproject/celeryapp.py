@@ -9,23 +9,23 @@ from celery.schedules import crontab
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eshopperproject.settings')
 
 app = Celery('eshopperproject')
-# app.conf.enable_utc = False
-# app.conf.update(timezone ='Africa/Nigeria')
 
 app.config_from_object(settings, namespace='CELERY')
 
-# app.conf.beat_schedule = {
-#     'Happy Birthday mails by 6am': {
-#         'task': 'userapp.tasks.Send_birthday_mail',
-#         'schedule': crontab(hour=11, minute=45),
-#         # 'args': ()
-#     },
-#     # checks database everyday by 9:27am and deletes all accounts that have not been verified after 24hrs.
-#     'Delete 24hrs old unverified mail': {
-#         'task': 'userapp.tasks.Delete_unverified_mail',
-#         'schedule': crontab(hour=10, minute=27),  # 1 hour behind Nigerian time
-#     }
-# }
+app.conf.beat_schedule = {
+    'Start Auction': {
+        'task': 'auction_app.tasks.auction_activation',
+        'schedule': crontab(),
+        # 'args': ()
+    },
+    'Deactivate Auction': {
+        'task': 'auction_app.tasks.auction_deactivation',
+        'schedule': crontab(),
+        # 'args': ()
+    },
+}
+
+
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 

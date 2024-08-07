@@ -17,6 +17,9 @@
     <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
 </head>
+{%block modal%}
+{%endblock modal%}
+
 {% block slider %}{%endblock slider%}
 
 {% block content %}
@@ -437,7 +440,7 @@
                         </ul>
                     </div>
                     <div class="chat" id="chat">
-                        {%if auction_mode %}
+                        {%if auction_mode == 'Activated' %}
                         <div class="chat-header clearfix">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -477,6 +480,15 @@
                                         <div class="message-data">
                                             <span>{{i.author.name}}</span>
                                             <div class="message-data-time">{{i.created}}</div>
+                                            <!-- {% if status %}
+                                            <span style="color: green;"
+                                                class="badge badge-pill badge-success">Online</span>
+                                            </span> -->
+                                            <!-- {%else%}
+                                            <span style="color: green;"
+                                                class="badge badge-pill badge-success">Offline</span>
+                                            </span>
+                                            {%endif%} -->
                                         </div>
                                         <div class="message my-message">{{i.auction_value}}</div>
                                     </li>
@@ -496,7 +508,7 @@
                             </div>
                         </div>
 
-                        {%else%}
+                        {% elif auction_mode == 'Deactivated' %}
                         <div class="chat-header clearfix">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -506,21 +518,15 @@
                                         <img src="{{particular_art|firstartpictures}}" alt="avatar">
                                         {%else%}
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
-
-                                        {%endif%} <div class="chat-about">
+                                        {%endif%}
+                                        <div class="chat-about">
                                             <h6 class="m-b-0">{{particular_art.name}}</h6>
-                                            <small style="color: rgba(255, 0, 0, 0.501);">Auction Starting Soon</small>
+                                            <small style="color: rgba(255, 0, 0, 0.501);">Auction has ended</small>
                                         </div>
 
                                     </a>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
-                                    <!-- <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-                                            class="fa fa-camera"></i></a> -->
-                                    <!-- <a href="javascript:void(0);" class="btn btn-outline-primary"><i
-                                            class="fa fa-image"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i
-                                            class="fa fa-cogs"></i></a> -->
                                     <a href="javascript:void(0);" class="btn btn-outline-warning"><i
                                             class="fa fa-question"></i></a>
                                 </div>
@@ -533,7 +539,46 @@
                                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                                 alt="avatar" />
                                         </div>
-                                        <div class="message other-message float-right">No bids</div>
+                                        <div class="message other-message float-right">Auction has ended on
+                                            {{particular_art.auction_stop_time}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {% elif auction_mode == 'None' %}
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        {% if particular_art %}
+                                        {%include 'partials/status.html'%}
+                                        <img src="{{particular_art|firstartpictures}}" alt="avatar">
+                                        {%else%}
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
+
+                                        {%endif%} <div class="chat-about">
+                                            <h6 class="m-b-0">{{particular_art.name}}</h6>
+                                            <small style="color: rgba(255, 0, 0, 0.501);">Product not on auction
+                                                list</small>
+                                        </div>
+
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 hidden-sm text-right">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i
+                                            class="fa fa-question"></i></a>
+                                </div>
+                            </div>
+                            <div class="chat-history">
+                                <ul class="m-b-0">
+                                    <li class="clearfix">
+                                        <div class="message-data text-right">
+                                            <span class="message-data-time"> Today</span>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                alt="avatar" />
+                                        </div>
+                                        <div class="message other-message float-right">This art is not on auction</div>
                                     </li>
                                 </ul>
                             </div>
@@ -545,6 +590,43 @@
                                         class="form-control">
                                     <input type="submit" />
                                 </form>
+                            </div>
+                        </div>
+
+                        {% else %}
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        {% if particular_art %}
+                                        {%include 'partials/status.html'%}
+                                        <img src="{{particular_art|firstartpictures}}" alt="avatar">
+                                        {%else%}
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
+
+                                        {%endif%} <div class="chat-about">
+                                            <h6 class="m-b-0">{{particular_art.name}}</h6>
+                                            <small style="color: rgba(255, 0, 0, 0.501);">Enter any auction room</small>
+                                        </div>
+
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 hidden-sm text-right">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i
+                                            class="fa fa-question"></i></a>
+                                </div>
+                            </div>
+                            <div class="chat-history">
+                                <ul class="m-b-0">
+                                    <li class="clearfix">
+                                        <div class="message-data text-right">
+                                            <span class="message-data-time"> Today</span>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                alt="avatar" />
+                                        </div>
+                                        <div class="message other-message float-right">Please Select an Art</div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         {%endif%}
@@ -561,6 +643,9 @@
 {%block brands %}{%endblock brands %}
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/auction.js' %}"></script>
+{%block modalscript%}
+
+{%endblock modalscript%}
 <!-- <script>
     function scrollToBottom() {
         const container = document.getElementById('chat-history');

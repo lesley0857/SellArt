@@ -77,6 +77,7 @@ class ChatConsumer(WebsocketConsumer):
                                                 user_online=user).first()
         status = ''
         if onlineToF == None:
+            print(onlineToF)
             status = False
         else:
             status = True
@@ -98,7 +99,7 @@ class ChatConsumer(WebsocketConsumer):
         event = {
             'type': 'update_online_status',
         }
-        async_to_sync(self.channel_layer.group_send)(
+        async_to_sync(self.chnel_layer.group_send)(
             self.room_group_name, event
         )
         async_to_sync(self.channel_layer.group_discard)(
