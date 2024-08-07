@@ -1,53 +1,53 @@
+name: sell-art-docker
 version: '3.8'
 
 services:
 
   redis:
     restart: unless-stopped
-    image: "redis:7.0.11-alpine"
+    image: "redis:alpine"
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
     expose:
       - 6379
 
   art_django_app:
     build:
       context: .
-    entrypoint: /app/entrypoint.sh
+    image: djangoimage
+    command: /app/entrypoint.sh
     ports:
       - "8000:8000"
     volumes:
-      - ./static:/app/tradeconnect/static
-    env_file:
-      - .env
-    environment:
-      - "CELERY_BROKER_URL=redis://redis:6379/0"
+      - .:/app
     depends_on:
       - redis
 
   celery_app:
+    image: djangoimage
     container_name: celery
     build:
       context: .
     entrypoint: /app/worker_entrypoint.sh
-    command: celery --app=eshopperproject worker --pool=solo -l INFO
-    env_file:
-      - .env
+    command: celery -A eshopperproject worker -E -l info
+    volumes:
+      - .:/app
     depends_on:
       - redis
       - art_django_app
 
   beat:
     container_name: beat
-    build:
-      context: .
-    entrypoint: /app/beatentrypoint.sh
-    command: celery -A eshopperproject beat -l INFO
-    env_file:
-      - .env
+    image: djangoimage
+    command: celery -A eshopperproject beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/app
     depends_on:
       - redis
       - art_django_app
 
 volumes:
+  redis_data:
   static: #celery -A Ryvm_project.celeryapp worker --pool=solo -l INFO
