@@ -101,7 +101,7 @@ TEMPLATES = [
 ASGI_APPLICATION = "eshopperproject.asgi.application"
 
 # Celery Settings
-CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_BROKER_URL = os.environ.get('CELERYURL')
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = 'json'
 
