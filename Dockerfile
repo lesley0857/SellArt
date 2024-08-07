@@ -12,6 +12,6 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .
 
-# ENTRYPOINT [ "sh", "./entrypoint.sh" ]
-RUN chmod +x ./entrypoint.sh
-RUN chmod +x ./worker_entrypoint.sh
+ENTRYPOINT [ "bash", "./entrypoint.sh" ]
+# RUN chmod +x ./entrypoint.sh
+# RUN chmod +x ./worker_entrypoint.sh

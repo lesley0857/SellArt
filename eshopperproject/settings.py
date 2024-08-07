@@ -132,6 +132,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# 'daphne eshopperproject.asgi:application -b 0.0.0.0 -p $PORT'
 
 
 # Password validation
