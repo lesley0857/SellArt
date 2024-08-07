@@ -20,6 +20,7 @@ cron-descriptor==1.4.3
 cryptography==41.0.7
 daphne==4.1.0
 distlib==0.3.8
+dj-database-url==2.2.0
 Django==4.2.14
 django-allauth==0.63.6
 django-celery-beat==2.6.0
@@ -37,6 +38,7 @@ packaging==24.1
 pillow==10.4.0
 platformdirs==4.2.0
 prompt_toolkit==3.0.47
+psycopg2-binary==2.9.9
 pyasn1==0.6.0
 pyasn1_modules==0.4.0
 pycparser==2.22
