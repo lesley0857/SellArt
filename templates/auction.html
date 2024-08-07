@@ -628,6 +628,14 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="chat-history clearfix">
+                                <form id="form" ws-send class="input-group mb-0">
+                                    {%csrf_token%}
+                                    <input type="number" placeholder="Type your Bid here" name="input"
+                                        class="form-control">
+                                    <input type="submit" />
+                                </form>
+                            </div>
                         </div>
                         {%endif%}
                     </div>
