@@ -34,7 +34,7 @@ def home_view(request, **kwargs):
     else:
         print(request.user)
         user = Custombaseuser.objects.filter(id=request.user.pk).first()
-        art = Artproduct.objects.filter(owner__pk=request.user.pk)
+        art = Artproduct.objects.all()
         category = Category.objects.all()
         p = Paginator(art, 2)
         page_number = request.GET.get('page')
@@ -99,15 +99,12 @@ def profile_view(request):
         update_picture_form = update_picture(
             request.POST, request.FILES, instance=userr)
         if update_picture_form.is_valid():
-            print('pic')
             update_picture_form.save(commit=True)
 
     if request.method == "POST" and request.POST.get('type') == 'update_user_info':
         update_customer_form = update_customer(
             data=request.POST, instance=userr)
         if update_customer_form.is_valid():
-            print('valid')
-            # userr.set_password(pwd)
             update_customer_form.save(commit=True)
     if request.method == "POST" and request.POST.get('type') == 'update_password':
         current_pwd = request.POST.get('password')
