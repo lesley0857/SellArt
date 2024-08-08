@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
 import dj_database_url
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -101,7 +103,7 @@ TEMPLATES = [
 ASGI_APPLICATION = "eshopperproject.asgi.application"
 
 # Celery Settings
-CELERY_BROKER_URL = os.environ.get('CELERYURL')
+CELERY_BROKER_URL = os.environ.get('REDIS_URL')
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = 'json'
 
@@ -109,11 +111,11 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer",
+#     },
+# }
 
 # CHANNEL_LAYERS = {
 #     "default": {
@@ -145,10 +147,9 @@ DATABASES = {
 #     }
 # }
 
-# database_url = os.environ.get('DATABASE_URL')
-# DATABASES['default'] = dj_database_url.parse(database_url)
+database_url = os.getenv('DATABASE_URL')
+DATABASES['default'] = dj_database_url.parse(database_url)
 
-# postgresql://sellartpgdb_user:oCuMZdbPXYRhraIz2AxTq5TsyMdCtmxC@dpg-cqpqtojqf0us73aobl6g-a.oregon-postgres.render.com/sellartpgdb
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

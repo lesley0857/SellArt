@@ -90,16 +90,12 @@ class ChatConsumer(WebsocketConsumer):
         self.send(text_data=message_html)
 
     def disconnect(self, close_code):
-        # send out message before disconnecting
-        # based on the cause of disconnection
-        # On the load of auction page without a kwargs-
-        # diconnect the websocket
         user = Custombaseuser.objects.filter(name=self.user).first()
         self.augroup.delete()
         event = {
             'type': 'update_online_status',
         }
-        async_to_sync(self.chnel_layer.group_send)(
+        async_to_sync(self.channel_layer.group_send)(
             self.room_group_name, event
         )
         async_to_sync(self.channel_layer.group_discard)(
