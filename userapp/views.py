@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .form import signup_form
 from .models import *
 from .decorator import authenticate_user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from artapp.models import *
+from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .form import *
 
 
 def home_view(request, **kwargs):
@@ -82,16 +83,51 @@ def signup_view(request):
         Custombaseuser.objects.create_user(email=request.POST.get('Email'),
                                            name=request.POST.get('Name'),
                                            password=request.POST.get('Password'))
-        return redirect('profile_view')
+        return redirect('profile_update_view')
     context = {}
     return render(request, 'signup.html', context)
 
 
 @login_required(login_url='login')
 def profile_view(request):
+    userr = Custombaseuser.objects.get(email=request.user.email)
+    update_customer_form = update_customer(instance=userr)
+    update_picture_form = update_picture(
+        request.POST, request.FILES, instance=userr)
+    if request.method == "POST" and request.POST.get('type') == 'update_picture':
+        print(update_picture_form.data)
+        update_picture_form = update_picture(
+            request.POST, request.FILES, instance=userr)
+        if update_picture_form.is_valid():
+            print('pic')
+            update_picture_form.save(commit=True)
 
-    context = {}
-    return render(request, 'index.html', context)
+    if request.method == "POST" and request.POST.get('type') == 'update_user_info':
+        update_customer_form = update_customer(
+            data=request.POST, instance=userr)
+        if update_customer_form.is_valid():
+            print('valid')
+            # userr.set_password(pwd)
+            update_customer_form.save(commit=True)
+    if request.method == "POST" and request.POST.get('type') == 'update_password':
+        current_pwd = request.POST.get('password')
+        new_pwd = request.POST.get('new_password')
+        check = userr.check_password(current_pwd)
+        print(check)
+        if check == True:
+            userr.set_password(new_pwd)
+            userr.save()
+
+    if request.method == "POST" and request.POST.get('type') == 'delete':
+        print('in')
+        userr = Custombaseuser.objects.get(email=request.user.email)
+        userr.delete()
+        request.user.delete()
+
+    context = {'details': userr,
+               'update_picture_form': update_picture_form,
+               'update_customer_form': update_customer_form, }
+    return render(request, 'profile_update.html', context)
 
 
 def logout_view(request):

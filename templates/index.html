@@ -36,8 +36,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i>+234 701 951 7883</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> mckenzarts@gmail.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -84,11 +84,10 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								{% if request.user.is_authenticated %}
-
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+								<!-- <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
 								{%else%}
 								<li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li>
 								<li><a href="{% url 'signup' %}"><i class="fa fa-lock"></i> Signup</a></li>
@@ -120,13 +119,10 @@
 							<ul class="nav navbar-nav collapse navbar-collapse">
 
 								<li><a href="index.html">Home</a></li>
-								<li><a href="index.html">Contact</a></li>
 								<li><a href="index.html">Auction</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
 								{% if request.user.is_authenticated%}
 								<li><a href="index.html">logout</a></li>
 								<li><a href="index.html">Profile</a></li>
-								<li><a href="index.html">Profile Update</a></li>
 								{%else%}
 								<li><a href="index.html">login</a></li>
 								<li><a href="index.html">signup</a></li>
@@ -326,29 +322,31 @@
 							</script>
 							<div class="tab-pane fade active in" id="togg" onload="focuss()">
 								{% for art in page_obj.object_list %}
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="{{art|firstartpictures}}" alt="" />
-												<h2>{{art.price}}</h2>
-												<p>{{art.name}}</p>
-												<p>CATEGORY: {{art.category}}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i
-														class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
+								<a href="{{art.get_absolute_url}}">
+									<div class="col-sm-3">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="{{art|firstartpictures}}" alt="" />
+													<h2>{{art.price}}</h2>
+													<p>{{art.name}}</p>
+													<p>CATEGORY: {{art.category}}</p>
+													<a href="#" class="btn btn-default add-to-cart"><i
+															class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
 
+											</div>
 										</div>
 									</div>
-								</div>
+								</a>
 								{%endfor%}
 								<ul class="pagination">
 									{%if page_obj.has_previous %}
-									<a href="?page={{page_obj.previous_page_number}}"> Previous </a>
+									<a href="?page={{page_obj.previous_page_number}}"> Previous_Page </a>
 									{% endif %}
 									<li class="active"><a href="">{{page_obj.number}}</a></li>
 									{%if page_obj.has_next %}
-									<a href="?page={{page_obj.next_page_number}}">&raquo;</a>
+									<a href="?page={{page_obj.next_page_number}}">Next_Page</a>
 									{% endif %}
 								</ul>
 
@@ -364,8 +362,9 @@
 	</section>
 
 	{% block footer%}
-	<footer id="footer"><!--Footer-->
-		<div class="footer-top">
+	<footer id="footer">
+		<!--Footer-->
+		<!-- <div class="footer-top">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-2">
@@ -443,9 +442,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="footer-widget">
+		<!-- <div class="footer-widget">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-2">
@@ -508,9 +507,9 @@
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="footer-bottom">
+		<!-- <div class="footer-bottom">
 			<div class="container">
 				<div class="row">
 					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
@@ -518,9 +517,10 @@
 								href="http://www.themeum.com">Themeum</a></span></p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-	</footer><!--/Footer-->
+	</footer>
+	<!--/Footer-->
 	{%endblock footer%}
 </body>
 

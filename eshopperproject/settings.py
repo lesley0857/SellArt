@@ -145,8 +145,8 @@ DATABASES = {
 #     }
 # }
 
-database_url = os.environ.get('DATABASE_URL')
-DATABASES['default'] = dj_database_url.parse(database_url)
+# database_url = os.environ.get('DATABASE_URL')
+# DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgresql://sellartpgdb_user:oCuMZdbPXYRhraIz2AxTq5TsyMdCtmxC@dpg-cqpqtojqf0us73aobl6g-a.oregon-postgres.render.com/sellartpgdb
 # Password validation
