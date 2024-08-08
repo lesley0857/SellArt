@@ -83,7 +83,7 @@ def signup_view(request):
         Custombaseuser.objects.create_user(email=request.POST.get('Email'),
                                            name=request.POST.get('Name'),
                                            password=request.POST.get('Password'))
-        return redirect('profile_update_view')
+        return redirect('login')
     context = {}
     return render(request, 'signup.html', context)
 
