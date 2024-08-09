@@ -19,7 +19,7 @@ def home_view(request, **kwargs):
         art = Artproduct.objects.filter(owner__pk=request.user.pk)
         tabular_display = Artproduct.objects.filter(category=togg_number)
         category = Category.objects.all()
-        p = Paginator(tabular_display, 1)
+        p = Paginator(tabular_display, 3)
         print(art)
         page_number = request.GET.get('page')
         try:
@@ -36,7 +36,7 @@ def home_view(request, **kwargs):
         user = Custombaseuser.objects.filter(id=request.user.pk).first()
         art = Artproduct.objects.all()
         category = Category.objects.all()
-        p = Paginator(art, 2)
+        p = Paginator(art, 3)
         page_number = request.GET.get('page')
         try:
             # returns the desired page object
