@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mckenzarts.com',
                  'mc-kenz-arts.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://mc-kenz-arts.onrender.com',
-                        'https://www.mckenzarts.com/']
+                        'https://www.mckenzarts.com']
 
 # Application definition
 
