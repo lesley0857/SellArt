@@ -351,7 +351,7 @@
 													{%else%}
 													<img src="" alt="{{art.name}}" />
 													{%endif%}
-													<h2>${{art.price}}</h2>
+													<h2>$ {{art.price}}</h2>
 													<p>{{art.description}}</p>
 													<!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
 														cart</a> -->
@@ -364,7 +364,7 @@
 														{%else%}
 														<img src="" alt="{{art.name}}" />
 														{%endif%}
-														<h2>${{art.price}}</h2>
+														<h2>$ {{art.price}}</h2>
 														<p>{{art.description}}</p>
 														<!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
 															cart</a> -->
@@ -581,7 +581,7 @@
 		$('#myModal').modal('show');
 	});
 	// Set the date we're counting down to
-	var countDownDate = new Date("Aug 11, 2024 24:0:0").getTime();
+	var countDownDate = new Date("Aug 11, 2024 00:0:0").getTime();
 
 	// Update the count down every 1 second
 	var x = setInterval(function () {
