@@ -358,8 +358,8 @@
                     <div class="col-md-6 mt-1">
                         <h5>{{art.name}}</h5>
                         <div class="d-flex flex-row">
-                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                    class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                            <!-- <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                    class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span> -->
                         </div>
                         <div>
                             <table class="table">
@@ -377,9 +377,9 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Value</th>
-                                        <td>{{art.length}} cm</td>
-                                        <td>{{art.width}} cm</td>
-                                        <td>{{art.height}} cm</td>
+                                        <td>{{art.length}} inches</td>
+                                        <td>{{art.width}} inches</td>
+                                        <td>{{art.height}} inches</td>
                                         <td>{{art.weight}} kg</td>
                                         <td>{{art.frame}}</td>
                                     </tr>
@@ -391,13 +391,12 @@
                     </div>
                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                         <div class="d-flex flex-row align-items-center">
-                            <h4 class="mr-1">N{{art.price}}</h4><span class="strike-text">$20.99</span>
+                            <h4 class="mr-1">N{{art.price}}</h4>
                         </div>
-                        <h6 class="text-success">Free shipping</h6>
+                        <!-- <h6 class="text-success">Free shipping</h6> -->
                         <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button">
                                 <a href="{{art.get_auction_url}}">{{art.name}}</a>
-                            </button><button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to
-                                wishlist</button></div>
+                            </button></div>
                     </div>
                 </div>
                 {%endfor%}
@@ -432,7 +431,12 @@
                                     <img src="{{art|firstartpictures}}" alt="avatar">
                                     <div class="about">
                                         <div class="name">{{art.name}}</div>
-                                        <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
+                                        <!-- <div class="status">Auction Date:
+                                            {{art.auction_time.date}}
+                                        </div> -->
+                                        <!-- <div class="status">Auction Time:
+                                            {{art.auction_time.time}}
+                                        </div> -->
                                     </div>
                                 </li>
                             </a>
@@ -447,7 +451,7 @@
                                     {%include 'partials/status.html'%}
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                         {%if particular_art %}
-                                        <img src="{{particular_art.pk|firstartpictures}}" alt="avatar">
+                                        <img src="{{particular_art|firstartpictures}}" alt="avatar">
                                         {%else%}
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                                         {%endif%}
@@ -478,17 +482,9 @@
                                     {% else %}
                                     <li class="clearfix">
                                         <div class="message-data">
-                                            <span>{{i.author.name}}</span>
+                                            <span> <img src="{{i.author_id|imagefromauctionid}}" alt="avatar" />
+                                                {{i.author.name}}</span>
                                             <div class="message-data-time">{{i.created}}</div>
-                                            <!-- {% if status %}
-                                            <span style="color: green;"
-                                                class="badge badge-pill badge-success">Online</span>
-                                            </span> -->
-                                            <!-- {%else%}
-                                            <span style="color: green;"
-                                                class="badge badge-pill badge-success">Offline</span>
-                                            </span>
-                                            {%endif%} -->
                                         </div>
                                         <div class="message my-message">{{i.auction_value}}</div>
                                     </li>
@@ -540,7 +536,8 @@
                                                 alt="avatar" />
                                         </div>
                                         <div class="message other-message float-right">Auction has ended on
-                                            {{particular_art.auction_stop_time}}</div>
+                                            {{particular_art.auction_stop_time}}.
+                                            The maximum auction price is <span>{{max_price}}</span></div>
                                     </li>
                                 </ul>
                             </div>

@@ -37,6 +37,7 @@ CSRF_TRUSTED_ORIGINS = ['https://mc-kenz-arts.onrender.com',
 
 INSTALLED_APPS = [
     'daphne',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'cloudinary',
 
     'auction_app',
     'channels',
@@ -100,6 +103,12 @@ TEMPLATES = [
         },
     },
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': "dtj94u7rz",
+    'API_KEY': "493552313695446",
+    'API_SECRET': "H0f79ZRrbBLTEeRSy46J_XwUXx0",
+}
 
 # WSGI_APPLICATION = 'eshopperproject.wsgi.application'
 ASGI_APPLICATION = "eshopperproject.asgi.application"
@@ -193,7 +202,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+#
 AUTH_USER_MODEL = 'userapp.Custombaseuser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -18,12 +18,12 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            {%if products.id|firstartpictures %}
-                            <img src="{{products.id|firstartpictures}}" alt="" />
+                            {%if products|firstartpictures %}
+                            <img src="{{products|firstartpictures}}" alt="" />
                             {%else%}
                             <img src="" alt="{{products.name}}" />
                             {%endif%}
-                            <h2>$56</h2>
+                            <h2>{{products.price}}</h2>
                             <p>{{products.description}}</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
                                 cart</a>
@@ -35,28 +35,53 @@
                                 {%else%}
                                 <img src="" alt="{{products.name}}" />
                                 {%endif%}
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
+                                <h2>{{products.price}}</h2>
+                                <p>{{products.description}}</p>
                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
                                     to
                                     cart</a>
                             </div>
                         </div>
                     </div>
-                    <div class="choose">
+                    <!-- <div class="choose">
                         <ul class="nav nav-pills nav-justified">
                             <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
                             <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-sm-7">
-                <div class="product-image-wrapper">
+                <div class="single-products">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Dimension</th>
+                                <th scope="col">Length</th>
+                                <th scope="col">Width</th>
+                                <th scope="col">Height</th>
+                                <th scope="col">Weight</th>
+                                <th scope="col">Frame</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Value</th>
+                                <td>{{products.length}} inches</td>
+                                <td>{{products.width}} inches</td>
+                                <td>{{products.height}} inches</td>
+                                <td>{{products.weight}} kg</td>
+                                <td>{{products.frame}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            {%if products.id|firstartpictures %}
-                            <img src="{{products.id|firstartpictures}}" alt="" />
+                            {%if products|firstartpictures %}
+                            <img src="{{products|firstartpictures}}" alt="" />
                             {%else%}
                             <img src="" alt="{{products.name}}" />
                             {%endif%}
@@ -86,7 +111,7 @@
                             <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 

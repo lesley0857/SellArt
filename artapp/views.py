@@ -5,6 +5,6 @@ from .models import *
 
 def product_view(request, id):
     art = Artproduct.objects.all()
-    products = Artproduct.objects.get(name=id)
+    products = Artproduct.objects.filter(name=id).first()
     context = {'products': products, 'art': art}
     return render(request, 'products.html', context)

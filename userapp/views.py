@@ -16,11 +16,10 @@ def home_view(request, **kwargs):
     if kwargs:
         togg_number = kwargs['id']
         user = Custombaseuser.objects.filter(id=request.user.pk).first()
-        art = Artproduct.objects.filter(owner__pk=request.user.pk)
+        art = Artproduct.objects.filter(id=togg_number)
         tabular_display = Artproduct.objects.filter(category=togg_number)
         category = Category.objects.all()
         p = Paginator(tabular_display, 3)
-        print(art)
         page_number = request.GET.get('page')
         try:
             page_obj = p.get_page(page_number)

@@ -91,7 +91,9 @@ class ChatConsumer(WebsocketConsumer):
 
     def disconnect(self, close_code):
         user = Custombaseuser.objects.filter(name=self.user).first()
-        self.augroup.delete()
+        groupp = auctiongroup. objects.filter(name=self.room_name,
+                                              user_online=user).first()
+        groupp.delete()
         event = {
             'type': 'update_online_status',
         }

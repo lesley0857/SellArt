@@ -31,7 +31,7 @@ def firstartpictures(value):
 
 @register.filter
 def secondartpictures(value):
-    pictures = ArtpictureModel.objects.filter(pic_name=value)
+    pictures = ArtpictureModel.objects.filter(pic_name=value.id)
     try:
         return pictures[1].file.url
     except:
