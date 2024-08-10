@@ -17,6 +17,9 @@ def home_view(request, **kwargs):
         togg_number = kwargs['id']
         user = Custombaseuser.objects.filter(id=request.user.pk).first()
         art = Artproduct.objects.filter(id=togg_number)
+        cat = Category.objects.filter(name='Smiling_Through_Pain')[0]
+        slider1 = Artproduct.objects.filter(category=cat).first()
+
         tabular_display = Artproduct.objects.filter(category=togg_number)
         category = Category.objects.all()
         p = Paginator(tabular_display, 3)
@@ -27,7 +30,9 @@ def home_view(request, **kwargs):
             page_obj = p.page(1)
         except EmptyPage:
             page_obj = p.page(p.num_pages)
-        context = {'user': user, 'art': art, 'category': category,
+        context = {'user': user, 'slider1': slider1,
+                   #    'slider2': slider2,
+                   'art': art, 'category': category,
                    'togg_number': togg_number, 'page_obj': page_obj}
         return render(request, 'index.html', context)
     else:

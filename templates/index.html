@@ -162,43 +162,30 @@
 					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
 							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<!-- <li data-target="#slider-carousel" data-slide-to="1"></li>
 							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						-->
 						</ol>
 
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>{{art.first.name}}</span></h1>
-									<h2><span>Auction</span> starting {{art.first.}}</h2>
-									<p>{{art.first.description}} </p>
+									<h1><span>{{slider1.name}}</span></h1>
+									<h2><span>Auction</span> starting {{slider1.auction_time}}</h2>
+									<p>{{slider1.description}} </p>
 									<button type="button" class="btn btn-default get">
-										<a>Click here</a>
+										<a href="{{slider1.get_auction_url}}">Click here</a>
 									</button>
 								</div>
 								<div class="col-sm-6">
-									{%if art.first|firstartpictures %}
-									<img src="{{art.first|firstartpictures}}" class="girl img-responsive" alt="" />
+									{%if slider1|firstartpictures %}
+									<img src="{{slider1|firstartpictures}}" class="girl img-responsive" alt="" />
 									{%endif%}
 									<!-- <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
 									<img src="images/home/pricing.png" class="pricing" alt="" /> -->
 								</div>
 							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span>{{art.first.name}}</span></h1>
-									<h2><span>Auction</span> starting {{art.first.}}</h2>
-									<p>{{art.first.description}} </p>
-									<button type="button" class="btn btn-default get">
-										<a>Click here</a>
-									</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="{{art.first|firstartpictures}}" class="girl img-responsive" alt="" />
-									<!-- <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png" class="pricing" alt="" /> -->
-								</div>
-							</div>
+
 
 							<!-- <div class="item">
 								<div class="col-sm-6">
@@ -334,11 +321,7 @@
 						</div>
 
 						<div class="tab-content">
-							<script>function focuss() {
-									var elem = document.getElementById('togg')
-									elem.focus
-								}
-							</script>
+
 							<div class="tab-pane fade active in" id="togg" onload="focuss()">
 								{% for art in page_obj.object_list %}
 								<a href="{{art.get_absolute_url}}">
@@ -351,6 +334,7 @@
 													{%else%}
 													<img src="" alt="{{art.name}}" />
 													{%endif%}
+													<span>{{art.name}}</span>
 													<h2>$ {{art.price}}</h2>
 													<p>{{art.description}}</p>
 													<!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
