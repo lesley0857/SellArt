@@ -29,15 +29,15 @@ SECRET_KEY = 'doxzhnh*cl@k(5htk946)z*zf8@$)5wua%!5=%*qyt-5!2euxk'
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.mckenzarts.com',
-                 'mc-kenz-arts.onrender.com']
+                 'mc-kenz-arts.onrender.com', 'clonesellart.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://mc-kenz-arts.onrender.com',
-                        'https://www.mckenzarts.com',]
+                        'https://www.mckenzarts.com',
+                        'https://clonesellart.onrender.com/']
 
 # Application definition
 
 INSTALLED_APPS = [
     'daphne',
-    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
-    'cloudinary',
 
     'auction_app',
     'channels',
@@ -104,11 +102,11 @@ TEMPLATES = [
     },
 ]
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': "dtj94u7rz",
-    'API_KEY': "493552313695446",
-    'API_SECRET': "H0f79ZRrbBLTEeRSy46J_XwUXx0",
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': "dtj94u7rz",
+#     'API_KEY': "493552313695446",
+#     'API_SECRET': "H0f79ZRrbBLTEeRSy46J_XwUXx0",
+# }
 
 # WSGI_APPLICATION = 'eshopperproject.wsgi.application'
 ASGI_APPLICATION = "eshopperproject.asgi.application"
@@ -158,8 +156,8 @@ DATABASES = {
 #     }
 # }
 
-# database_url = os.getenv('DATABASE_URL')
-# DATABASES['default'] = dj_database_url.parse(database_url)
+database_url = os.getenv('DATABASE_URL')
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -202,8 +200,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-#
+
 AUTH_USER_MODEL = 'userapp.Custombaseuser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
