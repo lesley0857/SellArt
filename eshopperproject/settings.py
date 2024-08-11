@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.mckenzarts.com',
                  'mc-kenz-arts.onrender.com', 'clonesellart.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://mc-kenz-arts.onrender.com',
                         'https://www.mckenzarts.com',
-                        'https://clonesellart.onrender.com/']
+                        'https://clonesellart.onrender.com',]
 
 # Application definition
 
