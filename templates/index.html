@@ -566,7 +566,7 @@
 		$('#myModal').modal('show');
 	});
 	// Set the date we're counting down to
-	var countDownDate = new Date("Aug 11, 2024 00:0:0").getTime();
+	var countDownDate = new Date("Aug 16, 2024 00:0:0").getTime();
 
 	// Update the count down every 1 second
 	var x = setInterval(function () {
@@ -590,7 +590,7 @@
 		// If the count down is finished, write some text
 		if (distance < 0) {
 			clearInterval(x);
-			document.getElementById("countdown").innerHTML = "Auction ongoing";
+			document.getElementById("countdown").innerHTML = "Auction ended";
 		}
 	}, 1000);
 </script>
