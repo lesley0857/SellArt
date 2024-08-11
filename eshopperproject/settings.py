@@ -29,10 +29,12 @@ SECRET_KEY = 'doxzhnh*cl@k(5htk946)z*zf8@$)5wua%!5=%*qyt-5!2euxk'
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.mckenzarts.com',
-                 'mc-kenz-arts.onrender.com', 'clonesellart.onrender.com']
+                 'mc-kenz-arts.onrender.com', 'clonesellart.onrender.com',
+                 'sellartcelery.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://mc-kenz-arts.onrender.com',
                         'https://www.mckenzarts.com',
-                        'https://clonesellart.onrender.com',]
+                        'https://clonesellart.onrender.com',
+                        'https://sellartcelery.onrender.com',]
 
 # Application definition
 
