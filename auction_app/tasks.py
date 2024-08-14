@@ -37,6 +37,7 @@ def auction_deactivation(self):
                        i.auction_stop_time.hour,]
             today_date = [datetime.datetime.now().day,
                           datetime.datetime.now().hour,]
+            print(f'{artdate}---{today_date}')
             if artdate == today_date:
                 i.auction_activated = 'Deactivated'
                 i.save()

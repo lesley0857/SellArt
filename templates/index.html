@@ -6,10 +6,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="TradeConnect">
+	<meta name="description" content="Art Sales and Auction">
 	<meta name="author" content="LeoWeb">
 	<title style="font-family: Garamond, serif;">
 		Mc Kenz Arts</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="icon" href="{% static 'images/home/semi_circle_icon_black_and_gold.png' %}" type="image/icon type">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -170,11 +172,14 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>{{slider1.name}}</span></h1>
+									<h1><span>
+											JOIN THE AUCTION NOW!!!!
+										</span></h1>
+									<span>{{slider1.name}}</span>
 									<h2><span>Auction</span> ending on {{slider1.auction_stop_time}}</h2>
 									<p>{{slider1.description}} </p>
 									<button type="button" class="btn btn-default get">
-										<a href="{{slider1.get_auction_url}}">Click here</a>
+										<a href="{{slider1.get_auction_url}}">Join Auction</a>
 									</button>
 								</div>
 								<div class="col-sm-6">
@@ -387,6 +392,33 @@
 				{% endblock tabular_display %}
 			</div>
 		</div>
+		<!-- <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202."
+			class="float" target="_blank">
+			<i class="fa fa-whatsapp my-float"></i>
+		</a> -->
+		<style>
+			.floating {
+				position: fixed;
+				width: 60px;
+				height: 60px;
+				bottom: 40px;
+				right: 40px;
+				background-color: #25d366;
+				color: #fff;
+				border-radius: 50px;
+				text-align: center;
+				font-size: 30px;
+				box-shadow: 2px 2px 3px #999;
+				z-index: 100;
+			}
+
+			.fab-icon {
+				margin-top: 16px;
+			}
+		</style>
+		<a href="https://wa.me/+2349052310522?text=Hi%20Mckenz" class="floating" target="_blank">
+			<i class="fab fa-whatsapp fab-icon"></i>
+		</a>
 	</section>
 
 	{% block footer%}
@@ -566,7 +598,7 @@
 		$('#myModal').modal('show');
 	});
 	// Set the date we're counting down to
-	var countDownDate = new Date("Aug 16, 2024 00:0:0").getTime();
+	var countDownDate = new Date("Aug 18, 2024 00:0:0").getTime();
 
 	// Update the count down every 1 second
 	var x = setInterval(function () {

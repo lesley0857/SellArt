@@ -67,7 +67,7 @@ def login_view(request):
         if email is not None:
             login(request, email)
             messages.info(request, "Login")
-            return redirect("home")
+            return redirect("auction_view")
         else:
             messages.info(request, "Username OR Password is incorrect")
 
