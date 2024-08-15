@@ -240,9 +240,7 @@ a#scrollUp i {
   padding-left: 15px;
 }
 
-/* .mainmenu ul li:first-child {
-  padding-left: 0px;
-} */
+.mainmenu ul li:first-child {}
 
 .mainmenu ul li a {
   color: #696763;
@@ -271,7 +269,7 @@ a#scrollUp i {
   outline: medium none;
   padding-left: 10px;
   width: 155px;
-  background-image: url(../images/home/searchicon.png);
+  background-image: url("../images/home/searchicon.46f1c2c57c5a.png");
   background-repeat: no-repeat;
   background-position: 130px;
 }
