@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'channels',
     'userapp',
     'artapp',
+    'cart',
 
     'django_celery_results',
     'django_celery_beat',

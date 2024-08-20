@@ -54,6 +54,9 @@ class Artproduct(models.Model):
     def get_auction_url(self):
         return reverse('auction_view_detail', kwargs={"id": self.name})
 
+    def addToCartUrl(self):
+        return reverse('addCartItem', kwargs={"id": self.pk})
+
     def __str__(self):
         return f'{self.name}'
 

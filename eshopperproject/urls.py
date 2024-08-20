@@ -5,6 +5,7 @@ from django.conf import settings
 from userapp.views import *
 from artapp.views import *
 from auction_app.views import *
+from cart.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +16,9 @@ urlpatterns = [
     path('profile/', profile_view, name='profile_view'),
     path('logout/', logout_view, name='logout_view'),
     path('signup/', signup_view, name='signup'),
+    path('cart/', cart_view, name='shoppingcart'),
+    path('cart/add/<str:id>/', addcart_view, name='addCartItem'),
+    path('cart/<str:id>/', cart_view, name='deleteItem'),
     path('product/<str:id>/', product_view, name='product_view'),
     path('auction/', auction_view, name='auction_view'),
     path('auction/<str:id>/', auction_view, name='auction_view_detail'),

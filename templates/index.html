@@ -31,6 +31,12 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72"
 		href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
 	<link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+	<script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+	<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+	<script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+		integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head><!--/head-->
 
 
@@ -54,6 +60,7 @@
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="{% url 'shoppingcart' %}"><i class="fa fa-shopping-cart"></i></a></li>
 								<!-- <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li> -->
 							</ul>
@@ -350,8 +357,10 @@
 													<span>{{art.name}}</span>
 													<h2>$ {{art.price}}</h2>
 													<p>{{art.description}}</p>
-													<!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
-														cart</a> -->
+													<a href="{{art.addToCartUrl}}"
+														class="btn btn-default add-to-cart"><i
+															class="fa fa-shopping-cart"></i>Add to
+														cart</a>
 												</div>
 												<div class="product-overlay">
 													<div class="overlay-content">
@@ -363,8 +372,10 @@
 														{%endif%}
 														<h2>$ {{art.price}}</h2>
 														<p>{{art.description}}</p>
-														<!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
-															cart</a> -->
+														<a href="{{art.addToCartUrl}}"
+															class="btn btn-default add-to-cart"><i
+																class="fa fa-shopping-cart"></i>Add to
+															cart</a>
 													</div>
 												</div>
 											</div>

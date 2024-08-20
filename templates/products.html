@@ -25,7 +25,8 @@
                             {%endif%}
                             <h2>$ {{products.price}}</h2>
                             <p>{{products.description}}</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
+                            <a href="{{products.addToCartUrl}}" class="btn btn-default add-to-cart"><i
+                                    class="fa fa-shopping-cart"></i>Add to
                                 cart</a>
                         </div>
                         <div class="product-overlay">
@@ -37,9 +38,11 @@
                                 {%endif%}
                                 <h2>{{products.price}}</h2>
                                 <p>{{products.description}}</p>
-                                <!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
-                                    to
-                                    cart</a> -->
+                                {%csrf_token%}
+
+                                <a href="{{products.addToCartUrl}}" class="btn btn-default add-to-cart"><i
+                                        class="fa fa-shopping-cart"></i>Add to
+                                    cart</a>
                             </div>
                         </div>
                     </div>
@@ -120,10 +123,13 @@
 
     </div><!--features_items-->
 </div>
+
+
 {% endblock content %}
 {%block tabular_display%}
 {%endblock tabular_display%}
 {%block category%}
 {%endblock category%}
+
 
 </html>
