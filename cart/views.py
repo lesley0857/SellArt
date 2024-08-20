@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from userapp.models import *
 # Create your views here.
 
 
+@login_required(login_url='login')
 def cart_view(request, **kwargs):
     if request.method == "POST":
         cart_id = kwargs['id']
@@ -21,6 +23,7 @@ def cart_view(request, **kwargs):
         return render(request, "shoppingcart.html", context)
 
 
+@login_required(login_url='login')
 def addcart_view(request, **kwargs):
     product_id = kwargs['id']
     print(kwargs)

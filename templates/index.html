@@ -180,7 +180,7 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>
-											JOIN THE AUCTION NOW!!!!
+											SOLD OUT!!!!
 										</span></h1>
 									{% if request.user.is_authenticated %}
 									<span><button type="button" class="btn btn-danger"><a style="color: beige;"
@@ -189,8 +189,9 @@
 									<span><button type="button" class="btn btn-danger"><a style="color: beige;"
 												href="{%url 'signup'%}">CREATE A FREE ACCOUNT</a></button></span>
 									{%endif%}
+									<h3>LIMITED PRINTS AVAILABLE</h3>
 									<div>SMILING THROUGH PAIN</div>
-									<h2><span>Auction</span> ends on {{slider1.auction_stop_time}}</h2>
+									<h2><span>Auction</span> ended on {{slider1.auction_stop_time}}</h2>
 									<h3>{{slider1.description}} </h3>
 									<button type="button" class="btn btn-default get">
 										<a href="{{slider1.get_auction_url}}">Join Auction</a>
@@ -242,30 +243,30 @@
 
 		{%block modal%}
 		<!-- The Modal -->
-		<div class="modal" id="myModal">
+		<!-- <div class="modal" id="myModal">
 			<div class="modal-dialog">
-				<div class="modal-content">
+				<div class="modal-content"> -->
 
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h4 class="modal-title">Count Down to End of Auction Sales</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
+		<!-- Modal Header -->
+		<!-- <div class="modal-header">
+			<h4 class="modal-title">Count Down to End of Auction Sales</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div> -->
 
-					<!-- Modal body -->
-					<div id="countdown" class="modal-body text-center">
+		<!-- Modal body -->
+		<!-- <div id="countdown" class="modal-body text-center">
 
-					</div>
+		</div> -->
 
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"><a href="{%url 'auction_view'%}">Auction
-								Page</a></button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-					</div>
+		<!-- Modal footer -->
+		<!-- <div class="modal-footer">
+			<button type="button" class="btn btn-secondary"><a href="{%url 'auction_view'%}">Auction
+					Page</a></button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div> -->
 
-				</div>
-			</div>
+		</div>
+		</div>
 		</div>
 		{% endblock modal %}
 
