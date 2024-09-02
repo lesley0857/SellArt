@@ -74,18 +74,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         # For each OAuth based provider, either add a ``SocialApp``
-#         # (``socialaccount`` app) containing the required client
-#         # credentials, or list them here:
-#         'APP': {
-#             'client_id': '123',
-#             'secret': '456',
-#             'key': ''
-#         }
-#     }
-# }
+
 
 ROOT_URLCONF = 'eshopperproject.urls'
 
@@ -105,11 +94,6 @@ TEMPLATES = [
     },
 ]
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': "dtj94u7rz",
-#     'API_KEY': "493552313695446",
-#     'API_SECRET': "H0f79ZRrbBLTEeRSy46J_XwUXx0",
-# }
 
 # WSGI_APPLICATION = 'eshopperproject.wsgi.application'
 ASGI_APPLICATION = "eshopperproject.asgi.application"
@@ -141,26 +125,27 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "sellartpgdb",
-#         "USER": "sellartpgdb_user",
-#         "PASSWORD": "oCuMZdbPXYRhraIz2AxTq5TsyMdCtmxC",
-#         "HOST": "postgresql://sellartpgdb_user:oCuMZdbPXYRhraIz2AxTq5TsyMdCtmxC@dpg-cqpqtojqf0us73aobl6g-a.oregon-postgres.render.com/sellartpgdb",
-#         "PORT": "5432",
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
 
-database_url = os.getenv('DATABASE_URL')
-DATABASES['default'] = dj_database_url.parse(database_url)
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv('NAME'),
+        "USER": os.getenv('USER'),
+        "PASSWORD": os.getenv('PASSWORD'),
+        "HOST": os.getenv('HOST'),
+        "PORT": '5432',
+    }
+}
+
+# database_url = ""
+# # os.getenv('DATABASE_URL')
+# DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -188,6 +173,22 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    }
+}
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % os.getenv(
+    'AWS_STORAGE_BUCKET_NAME')
+AWS_S3_FILE_OVERWRITE = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -202,7 +203,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'userapp.Custombaseuser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

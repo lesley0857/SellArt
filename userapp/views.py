@@ -10,6 +10,9 @@ from artapp.models import *
 from django.template.loader import render_to_string
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .form import *
+# psql -d mckenzartdb1 -h mckenzartdb1.cd82yyusgs4z.eu-north-1.rds.amazonaws.com -p 5432 -U postgres < C:\Users\Admin\Downloads\backup.sql
+# psql -h mckenzartdb1.cd82yyusgs4z.eu-north-1.rds.amazonaws.com -p 5432 -d mckenzartdb1 -U postgres
+# pg_restore --verbose --clean --no-acl -d mckenzartdb1 -h localhost -p 5432 -U postgres C:\Users\Admin\Downloads\2024-09-02T12_29Z.sql
 
 
 def home_view(request, **kwargs):

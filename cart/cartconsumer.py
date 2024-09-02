@@ -16,8 +16,13 @@ class CartConsumer(WebsocketConsumer):
         # async_to_sync(self.channel_layer.group_send)(
         #     self.room_group_name, event
         # )
-
+        print(self.room_name)
         self.accept()
+
+    def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        print(text_data_json)
+        data = text_data_json['input']
 
     def disconnect(self, close_code):
         pass
