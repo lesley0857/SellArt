@@ -172,22 +172,22 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
-    }
-}
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+#     }
+# }
 
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % os.getenv(
-    'AWS_STORAGE_BUCKET_NAME')
-AWS_S3_FILE_OVERWRITE = False
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % os.getenv(
+#     'AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_FILE_OVERWRITE = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -202,7 +202,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'userapp.Custombaseuser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
