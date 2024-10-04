@@ -9,7 +9,6 @@ from cart.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
     path('', home_view, name='home'),
     path('prod/<str:id>/', home_view, name='homee'),
     path('login/', login_view, name='login'),

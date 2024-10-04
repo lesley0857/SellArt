@@ -25,6 +25,15 @@ services:
     depends_on:
       - redis
 
+  nginx:
+    build: ./Nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./staticfiles:/app/staticfiles
+    depends_on:
+      - art_django_app
+
   celery_app:
     image: djangoimage
     container_name: celery

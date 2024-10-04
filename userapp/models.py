@@ -19,7 +19,6 @@ class ART_user_Manager(BaseUserManager):
         return user
 
     def create_superuser(self, email, name, password=None):
-
         user = self.create_user(email, name, password)
         user.is_staff = True
         user.is_superuser = True
