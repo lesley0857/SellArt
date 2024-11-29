@@ -33,8 +33,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.mckenzarts.com', 'django',
                  'sellartcelery.onrender.com']
 CSRF_TRUSTED_ORIGINS = ['https://mc-kenz-arts.onrender.com',
                         'https://www.mckenzarts.com',
-                        'https://clonesellart.onrender.com',
-                        'https://sellartcelery.onrender.com',]
+                        'https://clonesellart.onrender.com',]
 
 # Application definition
 
@@ -120,23 +119,23 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('NAME'),
-        "USER": os.getenv('USER'),
-        "PASSWORD": os.getenv('PASSWORD'),
-        "HOST": os.getenv('HOST'),
-        "PORT": 5432,
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv('NAME'),
+#         "USER": os.getenv('USER'),
+#         "PASSWORD": os.getenv('PASSWORD'),
+#         "HOST": os.getenv('HOST'),
+#         "PORT": 5432,
+#     }
+# }
 
 # database_url = ""
 # # os.getenv('DATABASE_URL')
