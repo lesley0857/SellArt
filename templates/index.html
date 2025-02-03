@@ -85,7 +85,7 @@
 						<div class="btn-group pull-right">
 							<div class="btn-group">
 								{% if request.user.is_authenticated %}
-								<li>
+								<!-- <li>
 									<div class=" image d-flex flex-column justify-content-center align-items-center">
 										<button class="btn btn-secondary">
 											<img src="{{user.profile_pic.url}}" height="100" width="100" />
@@ -93,7 +93,7 @@
 											class="idd"></span>
 
 									</div>
-								</li>
+								</li> -->
 								{%endif%}
 							</div>
 						</div>
@@ -107,9 +107,12 @@
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li> -->
 								{%else%}
-								<li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li>
-								<li><a href="{% url 'signup' %}"><i class="fa fa-lock"></i> Signup</a></li>
-								<li><a href="{% url 'home' %}"><i class="fa fa-crosshairs"></i> Home</a></li>
+								<!-- <li><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a></li> -->
+								<!-- <li><a href="{% url 'signup' %}"><i class="fa fa-lock"></i> Signup</a></li> -->
+								<!-- <li><a href="{% url 'home' %}"><i class="fa fa-crosshairs"></i> Home</a></li>
+								<li><a href="{% url 'home' %}"><i class="fa fa-crosshairs"></i> Original</a></li>
+								<li><a href="{% url 'home' %}"><i class="fa fa-crosshairs"></i> Print</a></li> -->
+
 								{%endif%}
 							</ul>
 						</div>
@@ -137,13 +140,16 @@
 							<ul class="nav navbar-nav collapse navbar-collapse">
 
 								<li><a href="{% url 'home' %}">Home</a></li>
-								<li><a href="{% url 'auction_view' %}">Auction</a></li>
+								<li><a href="{% url 'home' %}">Original</a></li>
+								<li><a href="{% url 'home' %}">Prints</a></li>
+								<li><a href="{% url 'home' %}">Commissions</a></li>
+								<!-- <li><a href="{% url 'auction_view' %}">Auction</a></li> -->
 								{% if request.user.is_authenticated%}
-								<li><a href="{% url 'logout_view' %}">logout</a></li>
-								<li><a href="{% url 'profile_view' %}">Profile</a></li>
+								<!-- <li><a href="{% url 'logout_view' %}">logout</a></li> -->
+								<!-- <li><a href="{% url 'profile_view' %}">Profile</a></li> -->
 								{%else%}
-								<li><a href="{% url 'login' %}">login</a></li>
-								<li><a href="{% url 'signup' %}">signup</a></li>
+								<!-- <li><a href="{% url 'login' %}">login</a></li> -->
+								<!-- <li><a href="{% url 'signup' %}">signup</a></li> -->
 								{%endif%}
 							</ul>
 						</div>
@@ -196,11 +202,36 @@
 									</button>
 								</div>
 								<div class="col-sm-6">
-									{%if slider1|firstartpictures %}
-									<img src="{{slider1|firstartpictures}}" class="girl img-responsive" alt="" />
+
+									<img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
+									<img src="images/home/pricing.png" class="pricing" alt="" />
+								</div>
+							</div>
+
+							<div class="item ">
+								<div class="col-sm-6">
+									<h1><span>
+											SOLD OUT!!!!
+										</span></h1>
+									{% if request.user.is_authenticated %}
+									<span><button type="button" class="btn btn-danger"><a style="color: beige;"
+												href="{{slider1.get_auction_url}}">JOIN AUCTION</a></button></span>
+									{%else%}
+									<span><button type="button" class="btn btn-danger"><a style="color: beige;"
+												href="{%url 'signup'%}">CREATE A FREE ACCOUNT</a></button></span>
 									{%endif%}
-									<!-- <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png" class="pricing" alt="" /> -->
+									<h3>LIMITED PRINTS AVAILABLE</h3>
+									<div>SMILING THROUGH PAIN</div>
+									<h2><span>Auction</span> ended on {{slider1.auction_stop_time}}</h2>
+									<h3>{{slider1.description}} </h3>
+									<button type="button" class="btn btn-default get">
+										<a href="{{slider1.get_auction_url}}">Join Auction</a>
+									</button>
+								</div>
+								<div class="col-sm-6">
+
+									<img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
+									<img src="images/home/pricing.png" class="pricing" alt="" />
 								</div>
 							</div>
 
