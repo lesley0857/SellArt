@@ -4,7 +4,7 @@ from .models import *
 
 
 def product_view(request, id):
-    cat = Category.objects.filter(name='Smiling_Through_Pain')[0]
+    cat = Category.objects.filter(name=id).first()
     slider1 = Artproduct.objects.filter(category=cat).first()
     art = Artproduct.objects.all()
     products = Artproduct.objects.filter(name=id).first()

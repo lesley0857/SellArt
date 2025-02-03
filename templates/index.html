@@ -345,7 +345,8 @@
 
 				{% block tabular_display %}
 				<div class="col-sm-9 padding-right">
-					<div class="category-tab"><!--category-tab-->
+					<div class="category-tab">
+						<!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								{%for cat in category %}
@@ -364,7 +365,8 @@
 											<div class="single-products">
 												<div class="productinfo text-center">
 													{%if art|firstartpictures %}
-													<img src="{{art|firstartpictures}}" alt="" />
+													<img class="girl img-responsive" src="{{art|firstartpictures}}"
+														alt="" />
 													{%else%}
 													<img src="" alt="{{art.name}}" />
 													{%endif%}
@@ -610,7 +612,7 @@
 
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<!-- <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script> -->
 <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
 <script src="{% static 'js/price-range.js' %}"></script>
 <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
