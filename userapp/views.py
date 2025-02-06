@@ -55,7 +55,7 @@ def home_view(request, **kwargs):
             page_obj = p.page(p.num_pages)
         context = {'user': user, 'art': art, "slider1": slider1,
                    'category': category, 'page_obj': page_obj}
-        return render(request, 'index.html', context)
+        return render(request, 'indexx.html', context)
 
 
 @authenticate_user
