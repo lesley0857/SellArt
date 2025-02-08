@@ -22,7 +22,7 @@ def home_view(request, **kwargs):
 
         tabular_display = Artproduct.objects.filter(category=togg_number)
         category = Category.objects.all()
-        p = Paginator(tabular_display, 3)
+        p = Paginator(tabular_display, 4)
         page_number = request.GET.get('page')
         try:
             page_obj = p.get_page(page_number)
@@ -34,7 +34,7 @@ def home_view(request, **kwargs):
                    #    'slider2': slider2,
                    'art': art, 'category': category,
                    'togg_number': togg_number, 'page_obj': page_obj}
-        return render(request, 'index.html', context)
+        return render(request, 'indexx.html', context)
     else:
         print(request.user)
         cat = Category.objects.filter(name='Smiling_Through_Pain').first()
@@ -42,7 +42,7 @@ def home_view(request, **kwargs):
         user = Custombaseuser.objects.filter(id=request.user.pk).first()
         art = Artproduct.objects.all()
         category = Category.objects.all()
-        p = Paginator(art, 3)
+        p = Paginator(art, 4)
         page_number = request.GET.get('page')
         try:
             # returns the desired page object

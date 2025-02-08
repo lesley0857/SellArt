@@ -39,6 +39,8 @@ class Artproduct(models.Model):
     height = models.IntegerField(blank=True, null=True)
     weight = models.IntegerField(blank=True, null=True)
     frame = models.BooleanField(blank=True, null=True)
+    homes = models.BooleanField(default=False, blank=True, null=True)
+    sold = models.BooleanField(default=False, blank=True, null=True)
     brand = models.ForeignKey(
         Brand, on_delete=models.CASCADE, null=True, blank=True, related_name='category')
     creation_date = models.DateTimeField(auto_now_add=True, null=True)
