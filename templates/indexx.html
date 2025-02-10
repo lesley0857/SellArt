@@ -438,16 +438,17 @@
         {%endif%}
         {%endfor%}
 
-        <ul class="pagination">
-            {%if page_obj.has_previous %}
-            <a href="?page={{page_obj.previous_page_number}}"> Previous_Page </a>
-            {% endif %}
-            <li class="active"><a href="">{{page_obj.number}}</a></li>
-            {%if page_obj.has_next %}
-            <a href="?page={{page_obj.next_page_number}}">Next_Page</a>
-            {% endif %}
-        </ul>
+
     </section>
+    <ul class="pagination">
+        {%if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}"> Previous_Page </a>
+        {% endif %}
+        <li class="active"><a href="">{{page_obj.number}}</a></li>
+        {%if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">Next_Page</a>
+        {% endif %}
+    </ul>
     {% endblock productlist %}
 
     <section style="width: 100%; height: 200px;">
