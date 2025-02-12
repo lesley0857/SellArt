@@ -90,17 +90,6 @@
     {%endfor%}
 
 </section>
-<div>
-    <ul class="pagination">
-        {%if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}"> Previous_Page </a>
-        {% endif %}
-        <li style="list-style: none" class="active"><a href="">{{page_obj.number}}</a></li>
-        {%if page_obj.has_next %}
-        <a href="?page={{page_obj.next_page_number}}">Next_Page</a>
-        {% endif %}
-    </ul>
-</div>
 {% endblock productlist %}
 
 
