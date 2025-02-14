@@ -9,7 +9,12 @@
 {%block modal%}
 {%endblock modal%}
 {% block productlist %}
-<section class="product-list">
+<section class="product-list" style="
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 20px;
+    padding: 20px;
+">
     {% for art in page_obj.object_list %}
     {%if art.sold == True%}
     <div class="product ">
@@ -19,35 +24,6 @@
         <p>${{art.price}}</p>
         <button>Add to Cart</button>
 
-        <div>
-            <div class="single-products">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Length</th>
-                            <th scope="col">Width</th>
-                            <th scope="col">Height</th>
-                            <th scope="col">Weight</th>
-                            <th scope="col">Frame</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{products.length}} inches</td>
-                            <td>{{products.width}} inches</td>
-                            <td>{{products.height}} inches</td>
-                            <td>{{products.weight}} kg</td>
-                            <td>{{products.frame}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div>{{products.description}}</div>
-            </div>
-
-        </div>
     </div>
     {%else%}
     <div class="product">
@@ -56,38 +32,40 @@
         <p>${{art.price}}</p>
         <button>Add to Cart</button>
 
-        <div>
-            <div class="single-products">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Length</th>
-                            <th scope="col">Width</th>
-                            <th scope="col">Height</th>
-                            <th scope="col">Weight</th>
-                            <th scope="col">Frame</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{art.length}} inches</td>
-                            <td>{{art.width}} inches</td>
-                            <td>{{art.height}} inches</td>
-                            <td>{{art.weight}} kg</td>
-                            <td>{{art.frame}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>{{art.description}}</div>
-            </div>
-
-        </div>
     </div>
 
     {%endif%}
+    <div>
+        <div class="single-products">
 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Length</th>
+                        <th scope="col">Width</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Frame</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{art.length}} inches</td>
+                        <td>{{art.width}} inches</td>
+                        <td>{{art.height}} inches</td>
+                        <td>{{art.weight}} kg</td>
+                        <td>{{art.frame}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div>{{products.description}}</div>
+        </div>
+
+    </div>
     {%endfor%}
+
 
 </section>
 {% endblock productlist %}

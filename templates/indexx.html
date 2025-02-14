@@ -127,7 +127,6 @@
             text-align: center;
             color: white;
             position: relative;
-
         }
 
         .hero-content {
@@ -137,25 +136,107 @@
             border-radius: 10px;
         }
 
-        .cta-button {
-            display: inline-block;
+        /* CTA Button Styling */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
             margin-top: 15px;
-            padding: 10px 20px;
-            background: #ff6600;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s ease-in-out;
+            justify-content: center;
+            width: 100%;
         }
 
-        .cta-button:hover {
-            background: #cc5200;
+        /* Buttons span 70% width */
+        .cta-button {
+            width: 70%;
+            max-width: 250px;
+            /* Ensures buttons don’t become too wide on large screens */
+            padding: 12px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            text-align: center;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
         }
+
+        /* Hover Effect */
+        .cta-button:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 70%;
+                max-width: 100%;
+            }
+        }
+
+        .about {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            /* background: #111; */
+            /* Dark background to match hero section */
+            color: rgb(12, 11, 11);
+        }
+
+        .about img {
+            width: 100%;
+            max-width: 75%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .about img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            max-width: 600px;
+            margin-top: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .about {
+                flex-direction: column;
+                text-align: left;
+                justify-content: center;
+                gap: 40px;
+            }
+
+            .about img {
+                max-width: 75%;
+                min-height: auto;
+            }
+
+            .about-text {
+                margin-top: 0;
+                max-width: 500px;
+            }
+        }
+
 
         /*  PRODUCT LIST SECTION */
         .product-list {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            /* 4 equal products per row on large screens */
             gap: 20px;
             padding: 20px;
         }
@@ -166,18 +247,40 @@
             text-align: center;
             border-radius: 8px;
             position: relative;
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
+        /* Make all product images equal size */
         .product img {
             width: 100%;
-            max-width: 150px;
+            max-width: 180px;
+            /* Ensures consistency */
+            height: 180px;
+            /* Fixed height */
+            object-fit: cover;
             border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product img:hover {
+            transform: scale(2);
         }
 
         .product h3 {
             margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .product p {
+            font-size: 1.1em;
+            color: #333;
         }
 
         .product button {
@@ -187,27 +290,49 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         .product button:hover {
             background: #cc5200;
         }
 
-        .product img:hover {
-            transform: scale(2.1);
+        a {
+            text-decoration: none;
+            /* Remove underline */
+            color: inherit;
+            /* Inherit text color from parent */
+        }
+
+        a:hover {
+            text-decoration: none;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .product-list {
-                display: grid;
-                padding: 10px;
-                gap: 10px;
                 grid-template-columns: repeat(2, 1fr);
+                /* 2 products per row */
+                gap: 15px;
+                padding: 10px;
             }
 
-            .product img:hover {
-                transform: scale(2.1);
+            .product {
+                width: 100%;
+                min-width: 150px;
+                /* Ensures equal size */
+                height: 100%;
+            }
+
+            .product img {
+                width: 100%;
+                max-width: 150px;
+                height: 150px;
+                object-fit: cover;
+            }
+
+            .product h3 {
+                font-size: 0.9em;
             }
         }
 
@@ -238,6 +363,7 @@
             display: flex;
             justify-content: center;
             margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         .pagination a {
@@ -257,11 +383,14 @@
 
         /* TABLE */
         table {
-            width: 300px;
+            width: 100%;
             border-collapse: collapse;
-            table-layout: auto;
-            overflow: hidden;
             text-align: left;
+            table-layout: auto;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th,
@@ -285,12 +414,10 @@
             position: relative;
             width: 100%;
             height: 500px;
-
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-
             overflow: hidden;
         }
 
@@ -325,39 +452,64 @@
             right: 10px;
         }
 
+
+
         /* subscription form */
 
         .subscriptionContainer {
             background: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 70%;
-            height: 100%;
-
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            /* Adjusts to fit the screen width */
+            max-width: 500px;
+            /* Prevents it from becoming too wide */
+            min-height: 240px;
+            /* Ensures a professional height */
+            margin: 10vh auto;
+            /* Centers it with a top margin */
+            text-align: center;
+            /* Aligns content centrally */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 15px;
+            /* Centers content vertically */
         }
 
         .subscriptionContainer h2 {
             margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #333;
         }
 
         .subscriptionContainer input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .subscriptionContainer input:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
         }
 
         .subscriptionContainer button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
         }
 
         .subscriptionContainer button:hover {
@@ -368,6 +520,29 @@
             margin-top: 10px;
             color: green;
             display: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .subscriptionContainer {
+                width: 95%;
+                /* Slightly larger width on small screens */
+                min-height: 250px;
+                /* Adjust height for smaller devices */
+                padding: 15px;
+            }
+
+            .subscriptionContainer h2 {
+                font-size: 1.3em;
+            }
+
+            .subscriptionContainer input,
+            .subscriptionContainer button {
+                padding: 10px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -418,19 +593,27 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to Our Mckenzart</h1>
-            <p>Discover amazing expressions strokes and paints.</p>
-            <a href="#" class="cta-button">Talk To Me</a>
+            <h1>MCKENZARTS</h1>
+            <p>Using colours, textures, and narratives, each piece has its own story to tell.</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">PRINTS</a>
+                <a href="#" class="cta-button">ORIGINALS</a>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <!-- <section class="about">
-        <div class="about-content">
-            <h2>About Us</h2>
-            <p>We are committed to delivering top-quality experiences and services to our customers worldwide.</p>
+    <section class="about">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGXupfygC4PWwqTr0cOX42M_wkqQR92XwKkQ&s"
+            alt="Artist Photo">
+        <div class="about-text">
+            <h2>About Me</h2>
+            <p>
+                I'm McKenzArts, a passionate artist who blends colors, textures, and stories into every piece.
+                My work explores emotions, culture, and individuality, creating timeless visual narratives that
+                resonate with people. Every artwork has its own unique story waiting to be discovered.
+            </p>
         </div>
-    </section> -->
+    </section>
 
     {% block productlist %}
     <!-- Product List Section -->
