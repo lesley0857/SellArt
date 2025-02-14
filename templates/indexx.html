@@ -22,7 +22,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #333;
+            background: black;
             padding: 10px 20px;
             color: white;
         }
@@ -45,6 +45,18 @@
             text-decoration: none;
             padding: 10px;
             display: block;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            /* Adjust as needed */
+            width: auto;
+            max-width: 150px;
         }
 
         .dropdown {
@@ -74,7 +86,7 @@
         /* Style the dropdown arrow */
         .arrow {
             margin-left: 5px;
-            font-size: 12px;
+            font-size: 19px;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -550,9 +562,9 @@
 <body>
     <nav class="navbar">
         <!-- <h2>Brand</h2> -->
-        <div>
-            <a href="{%url 'home'%}"><img style="height: 60px;
-                    width: 100%;" src="{% static 'images/home/semi_circle_icon_black_and_gold.png' %}" alt="LOGO" />
+        <div class="logo-container">
+            <a href="{%url 'home'%}"><img class="logo"
+                    src="{% static 'images/home/semi_circle_icon_black_and_gold.png' %}" alt="LOGO" />
             </a>
             <!-- <div style="font-family: Garamond, serif;"><b>
                     McKenzArts
