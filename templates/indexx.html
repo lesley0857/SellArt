@@ -24,6 +24,8 @@
             align-items: center;
             background: black;
             padding: 10px 20px;
+            margin-top: 0;
+
             color: white;
         }
 
@@ -115,8 +117,13 @@
                 position: absolute;
                 top: 50px;
                 left: 0;
-                background: #333;
+                background: black;
                 width: 100%;
+            }
+
+            .logo {
+                height: 40px;
+                /* Slightly smaller for mobile */
             }
 
             .menu.active {
@@ -205,7 +212,7 @@
 
         .about img {
             width: 100%;
-            max-width: 75%;
+            max-width: 90%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
@@ -608,8 +615,8 @@
             <h1>MCKENZARTS</h1>
             <p>Using colours, textures, and narratives, each piece has its own story to tell.</p>
             <div class="cta-buttons">
-                <a href="#" class="cta-button">PRINTS</a>
-                <a href="#" class="cta-button">ORIGINALS</a>
+                <a href="{%url 'homee' '2' %}" class="cta-button">PRINTS</a>
+                <a href="{%url 'homee' '1' %}" class="cta-button">ORIGINALS</a>
             </div>
         </div>
     </section>
