@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import dj_database_url
+import cloudinary_storage
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -54,6 +55,8 @@ INSTALLED_APPS = [
     'artapp',
     'cart',
 
+    'cloudinary',
+    'cloudinary_storage',
     'django_celery_results',
     'django_celery_beat',
 ]
@@ -176,13 +179,13 @@ AUTH_PASSWORD_VALIDATORS = [
 #     }
 # }
 
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % os.getenv(
-    'AWS_STORAGE_BUCKET_NAME')
-AWS_S3_FILE_OVERWRITE = False
+# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % os.getenv(
+#     'AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_FILE_OVERWRITE = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -207,13 +210,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
-]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static/')
+# ]
 
-MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+# MEDIA_URL = '/images/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+    'API_KEY': os.getenv('API_KEY'),
+    'API_SECRET': os.getenv('API_SECRET'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 SITE_ID = 1
