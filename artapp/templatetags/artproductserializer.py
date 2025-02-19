@@ -26,6 +26,7 @@ def artproduct_loop(value):
 @register.filter
 def firstartpictures(value):
     pictures = ArtpictureModel.objects.filter(pic_name=value.id)
+    print(pictures)
     return pictures.first().file.url
 
 

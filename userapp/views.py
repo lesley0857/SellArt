@@ -18,6 +18,7 @@ def home_view(request, **kwargs):
 
         tabular_display = Artproduct.objects.filter(category__name=togg_number)
         category = Category.objects.all()
+        picture_in_homes = Artproduct.objects.filter(homes=True)
         p = Paginator(tabular_display, 4)
         page_number = request.GET.get('page')
         try:
@@ -26,11 +27,12 @@ def home_view(request, **kwargs):
             page_obj = p.page(1)
         except EmptyPage:
             page_obj = p.page(p.num_pages)
-        context = {'category': category,
+        context = {'category': category, 'picture_in_homes': picture_in_homes,
                    'togg_number': togg_number, 'page_obj': page_obj}
         return render(request, 'indexx.html', context)
     else:
         art = Artproduct.objects.all()
+        picture_in_homes = Artproduct.objects.filter(homes=True)
         p = Paginator(art, 4)
         page_number = request.GET.get('page')
         try:
@@ -42,7 +44,8 @@ def home_view(request, **kwargs):
         except EmptyPage:
             # if page is empty then return last page
             page_obj = p.page(p.num_pages)
-        context = {'art': art, 'page_obj': page_obj}
+        context = {'art': art, 'picture_in_homes': picture_in_homes,
+                   'page_obj': page_obj}
         return render(request, 'indexx.html', context)
 
 
