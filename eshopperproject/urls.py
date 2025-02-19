@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('prod/<str:id>/', home_view, name='homee'),
+    path('submenu/<str:keyword>/', submenu_view, name='submenu_view'),
     path('login/', login_view, name='login'),
     path('profile/', profile_view, name='profile_view'),
     path('logout/', logout_view, name='logout_view'),

@@ -14,13 +14,9 @@ from .form import *
 
 def home_view(request, **kwargs):
     if kwargs:
-        togg_number = kwargs['id']
-        user = Custombaseuser.objects.filter(id=request.user.pk).first()
-        art = Artproduct.objects.filter(id=togg_number)
-        cat = Category.objects.filter(name='Smiling_Through_Pain').first()
-        slider1 = Artproduct.objects.filter(category=cat).first()
+        togg_number = kwargs['id']  # String
 
-        tabular_display = Artproduct.objects.filter(category=togg_number)
+        tabular_display = Artproduct.objects.filter(category__name=togg_number)
         category = Category.objects.all()
         p = Paginator(tabular_display, 4)
         page_number = request.GET.get('page')
@@ -30,18 +26,11 @@ def home_view(request, **kwargs):
             page_obj = p.page(1)
         except EmptyPage:
             page_obj = p.page(p.num_pages)
-        context = {'user': user, 'slider1': slider1,
-                   #    'slider2': slider2,
-                   'art': art, 'category': category,
+        context = {'category': category,
                    'togg_number': togg_number, 'page_obj': page_obj}
         return render(request, 'indexx.html', context)
     else:
-        print(request.user)
-        cat = Category.objects.filter(name='Smiling_Through_Pain').first()
-        slider1 = Artproduct.objects.filter(category=cat).first()
-        user = Custombaseuser.objects.filter(id=request.user.pk).first()
         art = Artproduct.objects.all()
-        category = Category.objects.all()
         p = Paginator(art, 4)
         page_number = request.GET.get('page')
         try:
@@ -53,8 +42,57 @@ def home_view(request, **kwargs):
         except EmptyPage:
             # if page is empty then return last page
             page_obj = p.page(p.num_pages)
-        context = {'user': user, 'art': art, "slider1": slider1,
-                   'category': category, 'page_obj': page_obj}
+        context = {'art': art, 'page_obj': page_obj}
+        return render(request, 'indexx.html', context)
+
+
+def submenu_view(request, **kwargs):
+    if kwargs:
+        print(kwargs)
+        togg_number = kwargs['keyword']  # String
+        if togg_number == 'Latest_Original':
+            tabular_display = Artproduct.objects.filter(
+                category__name='Original', latest=True)
+            p = Paginator(tabular_display, 4)
+            page_number = request.GET.get('page')
+            try:
+                page_obj = p.get_page(page_number)
+            except PageNotAnInteger:
+                page_obj = p.page(1)
+            except EmptyPage:
+                page_obj = p.page(p.num_pages)
+            context = {
+                'togg_number': togg_number, 'page_obj': page_obj}
+            return render(request, 'indexx.html', context)
+        elif togg_number == 'Sold_Original':
+            togg_number = kwargs['keyword']  # String
+            tabular_display = Artproduct.objects.filter(
+                category__name='Original', sold=True)
+            p = Paginator(tabular_display, 4)
+            page_number = request.GET.get('page')
+            try:
+                page_obj = p.get_page(page_number)
+            except PageNotAnInteger:
+                page_obj = p.page(1)
+            except EmptyPage:
+                page_obj = p.page(p.num_pages)
+            context = {
+                'togg_number': togg_number, 'page_obj': page_obj}
+            return render(request, 'indexx.html', context)
+    else:
+        art = Artproduct.objects.all()
+        p = Paginator(art, 4)
+        page_number = request.GET.get('page')
+        try:
+            # returns the desired page object
+            page_obj = p.get_page(page_number)
+        except PageNotAnInteger:
+            # if page_number is not an integer then assign the first page
+            page_obj = p.page(1)
+        except EmptyPage:
+            # if page is empty then return last page
+            page_obj = p.page(p.num_pages)
+        context = {'art': art, 'page_obj': page_obj}
         return render(request, 'indexx.html', context)
 
 
