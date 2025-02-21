@@ -22,7 +22,11 @@
         <div class="sold-tag">Sold</div>
         <h3>{{art.name}}</h3>
         <p>${{art.price}}</p>
-        <button>Add to Cart</button>
+        <a href="https://wa.me/+2347019517883?text={{art|firstartpictures}} {{art.name}}" target="_blank">
+            <button>
+                Purchase
+            </button>
+        </a>
 
     </div>
     {%else%}
@@ -30,7 +34,11 @@
         <img src="{{art|firstartpictures}}" alt="Product 1">
         <h3>{{art.name}}</h3>
         <p>${{art.price}}</p>
-        <button>Add to Cart</button>
+        <a href="https://wa.me/+2347019517883?text={{art|firstartpictures}} {{art.name}}" target="_blank">
+            <button>
+                Purchase
+            </button>
+        </a>
 
     </div>
 

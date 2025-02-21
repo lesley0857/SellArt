@@ -207,6 +207,8 @@
             transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 
+
+
         /* Hover Effect */
         .cta-button:hover {
             background: white;
@@ -697,15 +699,15 @@
                 </a>
                 <ul class="dropdown-content" id="Original-Prints">
                     <li class="sub-dropdown">
-                        <a href="">Sets of Prints</a>
+                        <a href="{% url 'submenu_view' 'Sets_of_Prints' %}">Sets of Prints</a>
                     </li>
 
                     <li class="sub-dropdown">
-                        <a href="">Individual Prints</a>
+                        <a href="{% url 'submenu_view' 'Individual_Prints' %}">Individual Prints</a>
                     </li>
 
                     <li class="sub-dropdown">
-                        <a href="">All Prints</a>
+                        <a href="{% url 'homee' 'Prints' %}">All Prints</a>
                     </li>
                 </ul>
             </li>
@@ -757,20 +759,29 @@
         {%if art.sold == True%}
         <a href="{{art.get_absolute_url}}">
             <div class="product">
-                <img src="{{art|firstartpictures}}" alt="Product 1">
+                <img id="Image_{{art.id}}" src="{{art|firstartpictures}}" alt="Product 1">
                 <div class="sold-tag">Sold</div>
                 <h3>{{art.name}}</h3>
                 <p>${{art.price}}</p>
-                <button>Add to Cart</button>
+                <a id="{{art.id}}" href="https://wa.me/+2347019517883?text={{art|firstartpictures}}" target="_blank"
+                    target="_blank">
+                    <button>
+                        Purchase
+                    </button>
+                </a>
             </div>
         </a>
         {%else%}
         <a href="{{art.get_absolute_url}}">
             <div class="product">
-                <img src="{{art|firstartpictures}}" alt="Product 1">
+                <img id="Image_{{art.id}}" src="{{art|firstartpictures}}" alt="Product 1">
                 <h3>{{art.name}}</h3>
                 <p>${{art.price}}</p>
-                <button>Add to Cart</button>
+                <a id="{{art.id}}" href="https://wa.me/+2347019517883?text={{art|firstartpictures}}" target="_blank">
+                    <button>
+                        Purchase
+                    </button>
+                </a>
             </div>
         </a>
         {%endif%}
@@ -872,6 +883,8 @@
                 document.getElementById('email').value = '';
             }
         }
+
+
 
         function changeSlide(direction) {
             slides[currentIndex].classList.remove('active');

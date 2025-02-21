@@ -82,6 +82,38 @@ def submenu_view(request, **kwargs):
             context = {
                 'togg_number': togg_number, 'page_obj': page_obj}
             return render(request, 'indexx.html', context)
+
+        elif togg_number == 'Sets_of_Prints':
+            togg_number = kwargs['keyword']  # String
+            tabular_display = Artproduct.objects.filter(
+                category__name='Prints', sets_of_prints=True)
+            p = Paginator(tabular_display, 4)
+            page_number = request.GET.get('page')
+            try:
+                page_obj = p.get_page(page_number)
+            except PageNotAnInteger:
+                page_obj = p.page(1)
+            except EmptyPage:
+                page_obj = p.page(p.num_pages)
+            context = {
+                'togg_number': togg_number, 'page_obj': page_obj}
+            return render(request, 'indexx.html', context)
+        elif togg_number == 'Individual_Prints':
+            togg_number = kwargs['keyword']  # String
+            tabular_display = Artproduct.objects.filter(
+                category__name='Prints', individual_prints=True)
+            p = Paginator(tabular_display, 4)
+            page_number = request.GET.get('page')
+            try:
+                page_obj = p.get_page(page_number)
+            except PageNotAnInteger:
+                page_obj = p.page(1)
+            except EmptyPage:
+                page_obj = p.page(p.num_pages)
+            context = {
+                'togg_number': togg_number, 'page_obj': page_obj}
+            return render(request, 'indexx.html', context)
+
     else:
         art = Artproduct.objects.all()
         p = Paginator(art, 4)

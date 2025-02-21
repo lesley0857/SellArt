@@ -42,6 +42,9 @@ class Artproduct(models.Model):
     homes = models.BooleanField(default=False, blank=True, null=True)
     latest = models.BooleanField(default=False, blank=True, null=True)
     sold = models.BooleanField(default=False, blank=True, null=True)
+    sets_of_prints = models.BooleanField(default=False, blank=True, null=True)
+    individual_prints = models.BooleanField(
+        default=False, blank=True, null=True)
     brand = models.ForeignKey(
         Brand, on_delete=models.CASCADE, null=True, blank=True, related_name='category')
     creation_date = models.DateTimeField(auto_now_add=True, null=True)

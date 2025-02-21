@@ -12,6 +12,8 @@ def product_view(request, id):
     art = Artproduct.objects.all()
     products = Artproduct.objects.filter(name=id)
     category = Category.objects.all()
+    picture_in_homes = Artproduct.objects.filter(homes=True)
+
     product_to_display = Paginator(products, 4)
     page_number = request.GET.get('page')
     try:
@@ -23,5 +25,6 @@ def product_view(request, id):
 
     context = {'category': category, 'slider1': slider1,
                'page_obj': page_obj,
+               'picture_in_homes': picture_in_homes,
                'products': products, 'art': art}
     return render(request, 'products.html', context)
