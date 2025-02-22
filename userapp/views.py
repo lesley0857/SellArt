@@ -19,7 +19,7 @@ def home_view(request, **kwargs):
         tabular_display = Artproduct.objects.filter(category__name=togg_number)
         category = Category.objects.all()
         picture_in_homes = Artproduct.objects.filter(homes=True)
-        p = Paginator(tabular_display, 4)
+        p = Paginator(tabular_display, 8)
         page_number = request.GET.get('page')
         try:
             page_obj = p.get_page(page_number)
@@ -33,7 +33,7 @@ def home_view(request, **kwargs):
     else:
         art = Artproduct.objects.all()
         picture_in_homes = Artproduct.objects.filter(homes=True)
-        p = Paginator(art, 4)
+        p = Paginator(art, 8)
         page_number = request.GET.get('page')
         try:
             # returns the desired page object
@@ -116,7 +116,7 @@ def submenu_view(request, **kwargs):
 
     else:
         art = Artproduct.objects.all()
-        p = Paginator(art, 4)
+        p = Paginator(art, 8)
         page_number = request.GET.get('page')
         try:
             # returns the desired page object
