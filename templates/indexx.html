@@ -166,7 +166,7 @@
 
         .hero {
             height: 100vh;
-            background: url('https://res.cloudinary.com/dtj94u7rz/image/upload/v1739712562/mckenzAndPeaky_cudajq.jpg') no-repeat center center/cover;
+            background: url('https://res.cloudinary.com/dtj94u7rz/image/upload/v1739715722/images/IMG-20250204-WA0008_eueqhw.jpg') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -753,7 +753,7 @@
     </section>
 
     <section class="about">
-        <img src="https://res.cloudinary.com/dtj94u7rz/image/upload/v1739715722/images/IMG-20250204-WA0008_eueqhw.jpg"
+        <img src="https://res.cloudinary.com/dtj94u7rz/image/upload/v1739712562/mckenzAndPeaky_cudajq.jpg"
             alt="Artist Photo">
         <div class="about-text">
             <h2>About Me</h2>
@@ -778,9 +778,7 @@
                 <p>${{art.price}}</p>
                 <p>{{art.description}}</p>
                 <p>
-                <h4>{{art.length}} inches</h4>
-                <h4>By</h4>
-                <h4>{{art.width}} inches</h4>
+                <h4>{{art.length}} X {{art.width}} inches</h4>
                 </p>
                 <button>Purchase</button>
             </div>
@@ -793,9 +791,8 @@
                 <p>${{art.price}}</p>
                 <p>{{art.description}}</p>
                 <p>
-                <h4>{{art.length}} inches</h4>
-                <h4>By</h4>
-                <h4>{{art.width}} inches</h4>
+                <h4>{{art.length}} X {{art.width}} inches</h4>
+
                 </p>
                 {% if art.frame %}
                 <p>FRAMED</p>
