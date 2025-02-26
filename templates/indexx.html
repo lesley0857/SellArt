@@ -827,10 +827,13 @@
 
     <section style="width: 100%; height: 200px;">
         <div class=" subscriptionContainer">
-            <h2>Subscribe to Our Newsletter</h2>
-            <input type="email" id="email" placeholder="Enter your email" required>
-            <button onclick="subscribe()">Subscribe</button>
-            <p class="message" id="message">Thank you for subscribing!</p>
+            <form action="{% url 'home'%}" method="post">
+                {% csrf_token %}
+                <h2>Subscribe to Our Newsletter</h2>
+                <input name="email" type="email" id="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+                <p class="message" id="message">Thank you for subscribing!</p>
+            </form>
         </div>
     </section>
 
@@ -890,15 +893,6 @@
             });
         });
 
-
-        function subscribe() {
-            var email = document.getElementById('email').value;
-            var message = document.getElementById('message');
-            if (email) {
-                message.style.display = 'block';
-                document.getElementById('email').value = '';
-            }
-        }
 
         function changeSlide(direction) {
             slides[currentIndex].classList.remove('active');

@@ -15,7 +15,8 @@ from .form import *
 def home_view(request, **kwargs):
     if kwargs:
         togg_number = kwargs['id']  # String
-
+        if request.method == "POST":
+            print(f'stringg-------------{request.POST.get('email')}')
         tabular_display = Artproduct.objects.filter(category__name=togg_number)
         category = Category.objects.all()
         picture_in_homes = Artproduct.objects.filter(homes=True)
@@ -31,6 +32,10 @@ def home_view(request, **kwargs):
                    'togg_number': togg_number, 'page_obj': page_obj}
         return render(request, 'indexx.html', context)
     else:
+        if request.method == "POST":
+            email = request.POST.get('email')
+            SubscribedUsers.objects.create(email=email)
+
         art = Artproduct.objects.all()
         picture_in_homes = Artproduct.objects.filter(homes=True)
         p = Paginator(art, 8)
