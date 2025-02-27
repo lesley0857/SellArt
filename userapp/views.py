@@ -16,7 +16,9 @@ def home_view(request, **kwargs):
     if kwargs:
         togg_number = kwargs['id']  # String
         if request.method == "POST":
-            print(f'stringg-------------{request.POST.get('email')}')
+            email = request.POST.get('email')
+            SubscribedUsers.objects.create(email=email)
+
         tabular_display = Artproduct.objects.filter(category__name=togg_number)
         category = Category.objects.all()
         picture_in_homes = Artproduct.objects.filter(homes=True)
